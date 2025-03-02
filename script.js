@@ -91,7 +91,7 @@ let totalAbs = 15;
 if (averageGrade > minGradeToPass && totalAbs < maxAbsAllowedForScholarship) {
     console.log(`Felicitari, esti eligibil pentru bursa`)
 
-} else if (averageGrade > minGradeToPass && totalAbs < maxAbsAllowedForScholarship) {
+} else if (averageGrade < minGradeToPass && totalAbs < maxAbsAllowedForScholarship) {
     console.log(`Ai numarul de absente admis, dar nu te incadrezi cu media sa iei bursa`)
 } else if (averageGrade > minGradeToPass && totalAbs > maxAbsAllowedForScholarship) {
     console.log(`Ai media sa iei bursa, dar nu te incadrezi cu absentele`)
