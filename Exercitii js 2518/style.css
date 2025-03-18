@@ -1,0 +1,118 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Kode Mono";
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-color-buttons {
+    position: relative;
+    height: 40px;
+
+}
+
+.switch-color-buttons:hover {
+    background-color: rgba(0, 0, 0, 55%);
+}
+
+.color-switcher-container {
+    position: relative;
+    background-color: #AD636C;
+    height: 80%;
+    width: 80%;
+    border-radius: 24px;
+    display: flex;
+    /* pe flex-direction: column se inverseaza axele */
+    flex-direction: column;
+    /* OY */
+    align-items: center;
+    /* OX */
+    justify-content: center;
+    gap: 32px;
+}
+
+.color-switcher-container h2 {
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 75%);
+    padding-block: 8px;
+    padding-inline: 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.color-hexcode {
+    color: #AD636C;
+}
+
+.switch-color-buttons {
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 75%);
+    padding-block: 8px;
+    padding-inline: 12px;
+    border-radius: 6px;
+    font-weight: 400;
+    border: none;
+    width: fit-content;
+    font-size: 24px;
+
+}
+
+.show-used-colors {
+    position: absolute;
+    top: 40px;
+    left: 56px;
+    width: fit-content;
+}
+
+.show-nr-of-clicks {
+    position: absolute;
+    top: 40px;
+    right: 56px;
+    background-color: rgba(0, 0, 0, 75%);
+    color: #FFFFFF;
+    padding-block: 8px;
+    padding-inline: 12px;
+    border-radius: 6px;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+
+.previous-button {
+    position: absolute;
+    left: 0px;
+    transform: translateX(16px);
+    transition: transform 1s, opacity 2s;
+    opacity: 0;
+    width: 144px;
+
+}
+
+.next-button {
+    position: absolute;
+    right: 0px;
+    transform: translateX(-16px);
+    transition: transform 1.5s, opacity 3s;
+    opacity: 0;
+    width: 144px;
+}
+
+.next-button.show {
+    transform: translateX(-80px);
+    opacity: 1;
+}
+
+.previous-button.show {
+    transform: translateX(80px);
+    opacity: 1;
+}
