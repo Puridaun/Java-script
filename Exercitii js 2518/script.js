@@ -110,8 +110,10 @@ const removePreviousButton = () => {
     if (previousButton && nextButton) {
         previousButton.remove();
         previousButton = null;
+
         nextButton.remove();
         nextButton = null;
+
         isCreated = false;
     }
 
@@ -171,12 +173,16 @@ const nextColor = () => {
 
     index = indexValue[indexValue.length - 1];
     clickCounter++
+
     sectionContainer.style.backgroundColor = colors[index];
+    sectionContainer.style.transition = 'background-color .8s';
     colorHexcode.style.color = colors[index];
     colorHexcode.innerHTML = colors[index];
     showClickCount.innerHTML = clickCounter;
+
     usedColorsArray.push(colors[index])
     console.log(usedColorsArray)
+
     index++;
 
 
