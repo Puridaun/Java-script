@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Split-calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="tip-calculator-container">
+      <img class="logo" src="./assets/SPLITTER.svg" />
+      <div class="tip-calculator">
+        <div class="tip-calculator-functional-side">
+          <form class="tip-calculator-form">
+            <div class="show-error">
+              <label class="standard-label" for="amount">Bill</label>
+              <p class="bill-amount-error error-message">
+                Amount must be greater than 0
+              </p>
+            </div>
+            <div class="input-container">
+              <img class="dollar-img" src="./assets/$.svg" />
+              <input
+                id="amount"
+                type="number"
+                class="standard-input standard-input-first"
+                placeholder="0"
+                name="amount"
+              />
+            </div>
+
+            <div class="select-tip-container">
+              <label class="standard-label" for="tip">Select Tip %</label>
+              <div class="tip-calculator-percent-buttons">
+                <button type="submit" class="percent-button">5%</button>
+                <button type="submit" class="percent-button">10%</button>
+                <button type="submit" class="percent-button">15%</button>
+                <button type="submit" class="percent-button">25%</button>
+                <button type="submit" class="percent-button">50%</button>
+                <input
+                  type="number"
+                  class="custom-button"
+                  name="custom-percent"
+                  placeholder="Custom"
+                />
+              </div>
+
+              <div class="show-error">
+                <label class="standard-label" for="number-of-people"
+                  >Number of People</label
+                >
+                <p class="num-of-people-error error-message">Can't be zero</p>
+              </div>
+              <div class="input-container">
+                <img class="people-img" src="./assets/People.svg" />
+                <input
+                  type="number"
+                  id="nr-of-people"
+                  class="standard-input standard-input-second"
+                  name="number-of-people"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="tip-calculator-results-side">
+          <div class="bill-split-results">
+            <div class="results-label">
+              <p>Tip Amount</p>
+              <p>/ person</p>
+            </div>
+            <p class="tip-amount-result">$0.00</p>
+          </div>
+          <div class="bill-split-results">
+            <div class="results-label">
+              <p>Total</p>
+              <p>/ person</p>
+            </div>
+            <p class="total-result">$0.00</p>
+          </div>
+
+          <button
+            type="button"
+            disabled="true"
+            class="results-side-button reset-button"
+          >
+            RESET
+          </button>
+        </div>
+      </div>
+    </section>
+    <script src="script.js"></script>
+  </body>
+</html>
