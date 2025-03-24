@@ -40,6 +40,8 @@ const selectButton = (e) => {
         percentButton.forEach(button => button.classList.remove('pressed-button'));
         console.log("percentValueCustom is " + percentValue);
         document.querySelector('.custom-button').value = "";
+        resetBtn.disabled = false;
+        resetBtn.style.backgroundColor = 'var(--green-400)'
         return;
 
     };
