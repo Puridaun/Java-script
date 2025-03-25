@@ -98,7 +98,6 @@ const calculatorResults = (e) => {
         const billAmount = Number(data.get('amount'));
         const numPeople = Number(data.get('number-of-people'));
 
-        // console.log(typeof (billAmount), typeof (percentValue))
 
         tip = billAmount * percentValue / 100;
 
