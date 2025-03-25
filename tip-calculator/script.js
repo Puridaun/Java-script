@@ -1,6 +1,7 @@
 
 
-// constants
+// ------- Constants ---------
+
 const form = document.querySelector('.tip-calculator-form');
 const percentButton = document.querySelectorAll('.percent-button');
 const tipAmount = document.querySelector('.tip-amount-result');
@@ -16,13 +17,13 @@ let percentValue = 0;
 
 
 
-// Funtions
+// ------ Funtions ----------
 
 
 const selectButton = (e) => {
 
-    console.log('selectButton() accesat')
-    console.log(e)
+    // console.log('selectButton() accesat')
+    // console.log(e)
 
     const data = new FormData(form)
     const buttonPressed = e.submitter;
@@ -58,17 +59,18 @@ const selectButton = (e) => {
 
 const validateInput = () => {
 
-
-
     const data = new FormData(form)
 
     if (data.get('amount') <= 0) {
+
         billAmountErr.style.display = 'block';
         standardInputFirst.style.borderColor = '#E17052';
+
         return false;
     }
 
     if (data.get('number-of-people') <= 0) {
+
         billAmountErr.style.display = 'none';
         numOfPeopleErr.style.display = 'block';
         standardInputSecond.style.borderColor = '#E17052';
@@ -76,32 +78,37 @@ const validateInput = () => {
         return false;
     }
 
+    standardInputFirst.style.borderColor = 'var(--grey-50)';
     standardInputSecond.style.borderColor = 'var(--grey-50)';
     numOfPeopleErr.style.display = 'none';
+    billAmountErr.style.display = 'none';
+
     return true;
 }
 
 const calculatorResults = (e) => {
+
     // console.log(e);
 
     if (validateInput()) {
+
         selectButton(e);
         const data = new FormData(form)
 
         const billAmount = Number(data.get('amount'));
         const numPeople = Number(data.get('number-of-people'));
 
-        console.log(typeof (billAmount), typeof (percentValue))
+        // console.log(typeof (billAmount), typeof (percentValue))
 
         tip = billAmount * percentValue / 100;
 
-        console.log("calculate tip is " + tip)
+        // console.log("calculate tip is " + tip)
 
         const tipPerPerson = (tip / numPeople).toFixed(2);
         const totalPerPerson = ((billAmount + tip) / numPeople).toFixed(2);
 
-        console.log('Tip per person:', tipPerPerson);
-        console.log('Total per person:', totalPerPerson);
+        // console.log('Tip per person:', tipPerPerson);
+        // console.log('Total per person:', totalPerPerson);
 
         showResults(tipPerPerson, totalPerPerson);
     }
@@ -121,11 +128,14 @@ const showResults = (tipValue, totalValue) => {
 
 
 const reset = () => {
+
     form.reset();
     tipAmount.innerText = "$0.00";
     total.innerText = "$0.00";
+
     tip = 0;
     percentButton.forEach(button => button.classList.remove('pressed-button'));
+
     numOfPeopleErr.style.display = 'none';
     billAmountErr.style.display = 'none';
 
@@ -138,9 +148,7 @@ const reset = () => {
 
 
 
-// Events
-
-
+// --- Events ---
 
 
 form.addEventListener('submit', (e) => {
