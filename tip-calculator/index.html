@@ -49,6 +49,7 @@
                   class="custom-button"
                   name="custom-percent"
                   placeholder="Custom"
+                  readonly="true"
                 />
               </div>
 
@@ -90,11 +91,32 @@
           <button
             type="button"
             disabled="true"
-            class="results-side-button reset-button"
+            class="reset-button reset-button-disabled"
           >
             RESET
           </button>
         </div>
+      </div>
+
+      <!-- ----------Bill's tip history------------ -->
+
+      <div class="bills-tip-history">
+        <table class="history-table">
+          <tr>
+            <th>No. Bill</th>
+            <th>Tip %</th>
+            <th>Date</th>
+            <th>Delete</th>
+            <th>Edit</th>
+          </tr>
+          <tr>
+            <td class="no-bill-value">1</td>
+            <td class="tip-value">0</td>
+            <td class="date-value">dd.mm.yyyy</td>
+            <td><button>Delete</button></td>
+            <td><button>Edit</button></td>
+          </tr>
+        </table>
       </div>
     </section>
     <script src="script.js"></script>
