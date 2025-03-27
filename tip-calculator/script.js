@@ -21,16 +21,25 @@ let tipPerPerson = 0;
 let totalPerPerson = 0;
 
 // ---------------History variables -----------------
+const historyTable = document.querySelector('.history-table');
 
-const noBillValue = document.querySelector('.no-bill-value');
-const historyTip = document.querySelector('.tip-value');
-const dateValue = document.querySelector('.date-value');
 
 const today = new Date;
 const day = today.getDate();
 const month = today.getMonth() + 1;
 const year = today.getFullYear();
+let numberOfBill = 0;
+let rowId = 0;
+const historyArray = [];
 
+const rowsHistory = {
+    billNumber: "",
+    tipProcent: "",
+    numberOfPeople: "",
+    actualDate: day + "." + month + "." + year,
+    buttonOne: 0,
+    buttonTwo: 0,
+};
 
 
 
@@ -86,21 +95,29 @@ const selectButton = (e) => {
 
 const handleCustomInput = () => {
 
-    resetBtn.classList.remove('reset-button-disabled');
-    resetBtn.classList.add('reset-button-enabled');
-    resetBtn.disabled = false;
-    percentButton.forEach(button => button.classList.remove('pressed-button'));
-    percentValue = customInput.value;
-    calculateTipAndTotal();
-    showResults(tipPerPerson, totalPerPerson);
+    if (validateInput()) {
+
+        resetBtn.classList.remove('reset-button-disabled');
+        resetBtn.classList.add('reset-button-enabled');
+        resetBtn.disabled = false;
+        percentValue = customInput.value;
+        calculateTipAndTotal();
+        showResults(tipPerPerson, totalPerPerson);
+        return;
+    }
+
+    customInput.value = "";
+    customInput.readOnly = true;
 }
 
 const selectCustomInput = () => {
 
+
     if (validateInput()) {
 
         customInput.readOnly = false;
-        customInput.addEventListener('input', handleCustomInput);
+        percentButton.forEach(button => button.classList.remove('pressed-button'));
+        customInput.addEventListener('blur', handleCustomInput);
     }
 }
 
@@ -109,6 +126,8 @@ const calculateTipAndTotal = () => {
     const data = new FormData(form);
     const billAmount = Number(data.get('amount'));
     const numPeople = Number(data.get('number-of-people'));
+
+    rowsHistory.numberOfPeople = numPeople;
 
     tip = billAmount * percentValue / 100;
     tipPerPerson = (tip / numPeople).toFixed(2);
@@ -136,12 +155,13 @@ const showResults = (tipValue, totalValue) => {
     tipAmount.innerText = `$${tipValue}`;
     total.innerText = `$${totalValue}`;
 
-    historyTip.innerText = percentValue;
-
+    rowsHistory.billNumber = numberOfBill;
+    rowsHistory.tipProcent = percentValue;
+    updateBillHistory();
 }
 
 const reset = () => {
-    console.log('test');
+
     form.reset();
     tipAmount.innerText = "$0.00";
     total.innerText = "$0.00";
@@ -167,7 +187,6 @@ const reset = () => {
 form.addEventListener('submit', (e) => {
 
     calculatorsResults(e);
-
 })
 
 customInput.addEventListener('click', selectCustomInput)
@@ -177,5 +196,90 @@ resetBtn.addEventListener('click', reset)
 
 // ---------------History script -----------------
 
+let numberOfHistoryButton = 0;
 
-dateValue.innerText = day + "." + month + "." + year;
+
+const createDeleteAndEditBtn = (row) => {
+
+
+    const td1 = document.createElement('td');
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerText = 'Delete';
+
+    const td2 = document.createElement('td');
+    const editBtn = document.createElement('button');
+    editBtn.innerText = 'Edit';
+
+    td1.appendChild(deleteBtn);
+    td2.appendChild(editBtn);
+
+    row.appendChild(td1);
+    row.appendChild(td2);
+
+    deleteBtn.id = numberOfHistoryButton;
+    editBtn.id = numberOfHistoryButton;
+    deleteBtn.type = 'button';
+    editBtn.type = 'button';
+
+    deleteBtn.addEventListener('click', (e) => {
+        const rowToDelete = e.target.closest('tr');  // Find the <tr> to delete
+        const billNumber = Number(rowToDelete.children[0].innerText); // Get billNumber from first <td>
+        console.log(rowToDelete.children[0])
+        // Find the correct index in historyArray
+        const index = historyArray.findIndex(item => item.billNumber === billNumber);
+
+        if (index !== -1) {
+            historyArray.splice(index, 1); // Remove from historyArray
+        }
+
+        rowToDelete.remove();  // Remove the row from the DOM
+        console.log(historyArray);  // Log the updated history array
+    });
+
+    rowsHistory.buttonOne = numberOfHistoryButton;
+    rowsHistory.buttonTwo = numberOfHistoryButton;
+    numberOfHistoryButton++;
+
+}
+
+const createHistoryItems = (row) => {
+
+    const td1 = document.createElement('td');
+    td1.innerText = rowsHistory.billNumber;
+
+    const td2 = document.createElement('td');
+    td2.innerText = rowsHistory.tipProcent + ' %';
+
+    const td3 = document.createElement('td');
+    td3.innerText = rowsHistory.numberOfPeople;
+
+    const td4 = document.createElement('td');
+    td4.innerText = rowsHistory.actualDate;
+
+    row.appendChild(td1);
+    row.appendChild(td2);
+    row.appendChild(td3);
+    row.appendChild(td4);
+}
+
+
+const updateBillHistory = () => {
+
+    numberOfBill++;
+
+    const tr = document.createElement('tr');
+    tr.id = rowId;
+    rowId++;
+    historyTable.appendChild(tr);
+    const tableRows = document.querySelectorAll('table tr');
+
+    createHistoryItems(tableRows[tableRows.length - 1]);
+    createDeleteAndEditBtn(tableRows[tableRows.length - 1]);
+
+    const rowHistory = { ...rowsHistory };
+    historyArray.push(rowHistory);
+
+
+
+}
+
