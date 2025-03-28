@@ -349,13 +349,13 @@ Breakpoints:
 
  .history-table button {
      border: none;
-     background-color: var(--grey-400);
+     background-color: white;
      border-radius: 8px;
-     padding-top: 2px;
+     padding-top: 4px;
      padding-bottom: 2px;
      padding-left: 6px;
      padding-right: 6px;
-     color: white;
+
      cursor: pointer;
  }
 

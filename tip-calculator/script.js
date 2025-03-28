@@ -15,7 +15,7 @@ const customInput = document.querySelector('.custom-button');
 
 
 let tip = 0;
-let percentValue = 0;
+let billTip = 0;
 
 let tipPerPerson = 0;
 let totalPerPerson = 0;
@@ -23,24 +23,13 @@ let totalPerPerson = 0;
 // ---------------History variables -----------------
 const historyTable = document.querySelector('.history-table');
 
-
+//Date
 const today = new Date;
 const day = today.getDate();
 const month = today.getMonth() + 1;
 const year = today.getFullYear();
-let numberOfBill = 0;
-let rowId = 0;
-const historyArray = [];
 
-const rowsHistory = {
-    billNumber: "",
-    tipProcent: "",
-    numberOfPeople: "",
-    actualDate: day + "." + month + "." + year,
-    buttonOne: 0,
-    buttonTwo: 0,
-};
-
+const history = [];
 
 
 
@@ -87,7 +76,7 @@ const selectButton = (e) => {
     buttonPressed.classList.add('pressed-button');
 
 
-    percentValue = Number(buttonPressed.innerText.slice(0, -1))
+    billTip = Number(buttonPressed.innerText.slice(0, -1))
     resetBtn.disabled = false;
     resetBtn.classList.remove('reset-button-disabled');
     resetBtn.classList.add('reset-button-enabled');
@@ -100,7 +89,7 @@ const handleCustomInput = () => {
         resetBtn.classList.remove('reset-button-disabled');
         resetBtn.classList.add('reset-button-enabled');
         resetBtn.disabled = false;
-        percentValue = customInput.value;
+        billTip = customInput.value;
         calculateTipAndTotal();
         showResults(tipPerPerson, totalPerPerson);
         return;
@@ -127,37 +116,27 @@ const calculateTipAndTotal = () => {
     const billAmount = Number(data.get('amount'));
     const numPeople = Number(data.get('number-of-people'));
 
-    rowsHistory.numberOfPeople = numPeople;
-
-    tip = billAmount * percentValue / 100;
+    tip = billAmount * billTip / 100;
     tipPerPerson = (tip / numPeople).toFixed(2);
     totalPerPerson = ((billAmount + tip) / numPeople).toFixed(2);
+
+    addBillToHistory(billAmount, numPeople);
+
+    history.push({
+        id: rowId,
+        bill: billAmount,
+        billTip: billTip,
+        numberOfPeople: numPeople,
+    });
+    rowId++
+    console.log(history);
 }
-
-
-const calculatorsResults = (e) => {
-
-    e.preventDefault();
-
-    if (validateInput()) {
-
-        selectButton(e);
-        calculateTipAndTotal();
-        showResults(tipPerPerson, totalPerPerson);
-    }
-}
-
-
-
 
 
 const showResults = (tipValue, totalValue) => {
+
     tipAmount.innerText = `$${tipValue}`;
     total.innerText = `$${totalValue}`;
-
-    rowsHistory.billNumber = numberOfBill;
-    rowsHistory.tipProcent = percentValue;
-    updateBillHistory();
 }
 
 const reset = () => {
@@ -181,6 +160,20 @@ const reset = () => {
     resetBtn.disabled = true;
 }
 
+
+const calculatorsResults = (e) => {
+
+    e.preventDefault();
+
+    if (validateInput()) {
+
+        selectButton(e);
+        calculateTipAndTotal();
+        showResults(tipPerPerson, totalPerPerson);
+    }
+}
+
+
 // --- Events ---
 
 
@@ -196,90 +189,41 @@ resetBtn.addEventListener('click', reset)
 
 // ---------------History script -----------------
 
-let numberOfHistoryButton = 0;
 
+const tableBody = document.querySelector('.table-body');
+let rowId = 0
+const addBillToHistory = (billAmount, numPeople) => {
 
-const createDeleteAndEditBtn = (row) => {
+    const historyBillElement = document.createElement('tr')
+    historyBillElement.id = rowId
+    historyBillElement.innerHTML = `      
+              <td>${billAmount}</td>
+              <td>${billTip} %</td>
+              <td>${numPeople}</td>
+              <td>Date</td>
+              <td>
+                <button class="delete-button">
+                    <img src="./assets/Delete.svg" />
+                </button>
+              </td>
+              <td><img src="./assets/Delete.svg" /></td> `;
 
+    tableBody.appendChild(historyBillElement);
 
-    const td1 = document.createElement('td');
-    const deleteBtn = document.createElement('button');
-    deleteBtn.innerText = 'Delete';
+    const deleteButton = historyBillElement.querySelector('.delete-button')
 
-    const td2 = document.createElement('td');
-    const editBtn = document.createElement('button');
-    editBtn.innerText = 'Edit';
-
-    td1.appendChild(deleteBtn);
-    td2.appendChild(editBtn);
-
-    row.appendChild(td1);
-    row.appendChild(td2);
-
-    deleteBtn.id = numberOfHistoryButton;
-    editBtn.id = numberOfHistoryButton;
-    deleteBtn.type = 'button';
-    editBtn.type = 'button';
-
-    deleteBtn.addEventListener('click', (e) => {
-        const rowToDelete = e.target.closest('tr');  // Find the <tr> to delete
-        const billNumber = Number(rowToDelete.children[0].innerText); // Get billNumber from first <td>
-        console.log(rowToDelete.children[0])
-        // Find the correct index in historyArray
-        const index = historyArray.findIndex(item => item.billNumber === billNumber);
+    const handleDeleteHistoryElement = () => {
+        const index = history.findIndex(item => item.id === Number(historyBillElement.id))
 
         if (index !== -1) {
-            historyArray.splice(index, 1); // Remove from historyArray
+            history.splice(index, 1);
+            console.log('updatedHistory ', history);
         }
 
-        rowToDelete.remove();  // Remove the row from the DOM
-        console.log(historyArray);  // Log the updated history array
-    });
+        tableBody.removeChild(historyBillElement);
+    }
 
-    rowsHistory.buttonOne = numberOfHistoryButton;
-    rowsHistory.buttonTwo = numberOfHistoryButton;
-    numberOfHistoryButton++;
-
-}
-
-const createHistoryItems = (row) => {
-
-    const td1 = document.createElement('td');
-    td1.innerText = rowsHistory.billNumber;
-
-    const td2 = document.createElement('td');
-    td2.innerText = rowsHistory.tipProcent + ' %';
-
-    const td3 = document.createElement('td');
-    td3.innerText = rowsHistory.numberOfPeople;
-
-    const td4 = document.createElement('td');
-    td4.innerText = rowsHistory.actualDate;
-
-    row.appendChild(td1);
-    row.appendChild(td2);
-    row.appendChild(td3);
-    row.appendChild(td4);
-}
+    deleteButton.addEventListener('click', handleDeleteHistoryElement);
 
 
-const updateBillHistory = () => {
-
-    numberOfBill++;
-
-    const tr = document.createElement('tr');
-    tr.id = rowId;
-    rowId++;
-    historyTable.appendChild(tr);
-    const tableRows = document.querySelectorAll('table tr');
-
-    createHistoryItems(tableRows[tableRows.length - 1]);
-    createDeleteAndEditBtn(tableRows[tableRows.length - 1]);
-
-    const rowHistory = { ...rowsHistory };
-    historyArray.push(rowHistory);
-
-
-
-}
-
+};
