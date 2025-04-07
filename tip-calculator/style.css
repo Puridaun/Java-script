@@ -247,11 +247,15 @@ Breakpoints:
      color: var(--grey-400);
  }
 
- .access-history-btn {
+ .access-buttons {
+     display: flex;
+     gap: 16px;
 
-     margin-left: auto;
-     margin-right: auto;
-     display: block;
+ }
+
+ .access-history-btn,
+ .access-stats-btn {
+     display: inline;
      padding: 4px;
      margin-top: 16px;
      background-color: white;
@@ -260,13 +264,15 @@ Breakpoints:
      border: none;
  }
 
- .access-history-btn img {
+ .access-history-btn img,
+ .access-stats-btn img {
      display: block;
      margin-top: auto;
      margin-bottom: auto;
  }
 
- .access-history-btn:hover {
+ .access-history-btn:hover,
+ .access-stats-btn:hover {
      border-radius: 16px;
      background-color: var(--green-400);
 
@@ -462,6 +468,28 @@ Breakpoints:
      }
  }
 
+
+ /* -------------------------Statistics -------------------- */
+
+ .bill-statistics {
+     width: 100%;
+     background-color: var(--white);
+     padding: 32px;
+     border-radius: 24px;
+     margin-top: 48px;
+     display: flex;
+     justify-content: space-between;
+
+
+ }
+
+ .statistics {
+     text-align: center;
+
+     font-size: 16px;
+     font-weight: 400;
+     color: var(--grey-900);
+ }
 
 
  /* ----------Overwriting classes----------- */

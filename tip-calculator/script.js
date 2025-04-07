@@ -13,9 +13,10 @@ const standardInputFirst = document.querySelector('.standard-input-first');
 const standardInputSecond = document.querySelector('.standard-input-second');
 const customInput = document.querySelector('.custom-button');
 const accessHistoryBtn = document.querySelector('.access-history-btn')
+const statsBtn = document.querySelector('.access-stats-btn')
 const editHistory = document.querySelector('.edit-history-section')
 const calculatorSection = document.querySelector('.tip-calculator-section')
-
+const billStatistics = document.querySelector('.bill-statistics')
 
 let numberOfErr = 0;
 
@@ -165,6 +166,7 @@ const calculateTipAndTotal = () => {
     });
     rowId++
     console.log(history);
+    updateStatistics();
 }
 
 
@@ -176,6 +178,7 @@ const showResults = (tipValue, totalValue) => {
     if (hideElement) {
 
         accessHistoryBtn.classList.remove('hide-element');
+        statsBtn.classList.remove('hide-element');
     }
 }
 
@@ -208,7 +211,6 @@ resetBtn.addEventListener('click', reset)
 
 
 
-
 // ---------------History script -----------------
 
 const tableBody = document.querySelector('.table-body');
@@ -236,6 +238,7 @@ const addBillToHistory = (billAmount, numPeople) => {
     const deleteButton = historyBillElement.querySelector('.delete-button')
     const editButton = historyBillElement.querySelector('.edit-button')
 
+
     const handleDeleteHistoryElement = () => {
 
         const index = history.findIndex(item => item.id === Number(historyBillElement.id))
@@ -255,9 +258,11 @@ const addBillToHistory = (billAmount, numPeople) => {
         }
 
         tableBody.removeChild(historyBillElement);
+        updateStatistics();
     }
 
     // --------------------------EDIT HISTORY script -----------------------------
+
     const handleEditHistoryElement = () => {
         const editBill = document.querySelector('.edit-bill')
         const tipEditInput = document.querySelector('.tip-edit-input')
@@ -289,5 +294,44 @@ accessHistoryBtn.addEventListener('click', showHistory)
 
 
 
-// --------------------------EDIT HISTORY script -----------------------------
 
+// -----------------------Statisctics script
+
+const showStatistics = () => {
+
+    percentButton.forEach(button => button.classList.remove('pressed-button'));
+    billStatistics.classList.toggle('hide-element')
+}
+
+statsBtn.addEventListener('click', showStatistics)
+
+
+const updateStatistics = () => {
+
+    let billSum = 0;
+    let tipSum = 0;
+    let max = 0
+
+    for (i = 0; i < history.length; i++) {
+
+        billSum += history[i].bill;
+        tipSum += history[i].billTip;
+
+        if (history[i].bill > max) {
+            max = history[i].bill;
+        }
+    }
+
+
+
+    const averageBill = (billSum / history.length).toFixed(2)
+    const averageTip = (tipSum / history.length).toFixed(2)
+
+    const averageBillValue = document.querySelector('.average-bill-value')
+    const averageTipValue = document.querySelector('.average-tip-value')
+    const mostExpensive = document.querySelector('.most-expensive-value')
+
+    averageBillValue.innerText = averageBill + " $";
+    averageTipValue.innerText = averageTip + " %";
+    mostExpensive.innerText = max;
+}
