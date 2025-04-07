@@ -13,6 +13,7 @@ const standardInputFirst = document.querySelector('.standard-input-first');
 const standardInputSecond = document.querySelector('.standard-input-second');
 const customInput = document.querySelector('.custom-button');
 
+let numberOfErr = 0;
 
 let tip = 0;
 let billTip = 0;
@@ -34,35 +35,61 @@ const history = [];
 
 
 // ------ Functions -------------------------------
+const reset = () => {
+
+    form.reset();
+    tipAmount.innerText = "$0.00";
+    total.innerText = "$0.00";
+    tip = 0;
+    customInput.value = "";
+    percentButton.forEach(button => button.classList.remove('pressed-button'));
+
+    numOfPeopleErr.style.display = 'none';
+    billAmountErr.style.display = 'none';
+
+
+    resetBtn.classList.remove('reset-button-enabled');
+    resetBtn.classList.add('reset-button-disabled');
+    resetBtn.style.backgroundColor = '';
+    standardInputFirst.style.borderColor = 'var(--grey-50)';
+    standardInputSecond.style.borderColor = 'var(--grey-50)';
+    resetBtn.disabled = true;
+}
+
 
 const validateInput = () => {
 
+    numberOfErr = 0;
     const data = new FormData(form)
 
     if (data.get('amount') <= 0) {
 
-        percentButton.forEach(button => button.classList.remove('pressed-button'));
         billAmountErr.style.display = 'block';
         standardInputFirst.style.borderColor = '#E17052';
         customInput.value = "";
-        return false;
+        numberOfErr++;
+    } else {
+        billAmountErr.style.display = 'none';
+        standardInputFirst.style.borderColor = 'var(--grey-50)';
     }
 
     if (data.get('number-of-people') <= 0) {
 
-        percentButton.forEach(button => button.classList.remove('pressed-button'));
-        billAmountErr.style.display = 'none';
         numOfPeopleErr.style.display = 'block';
         standardInputSecond.style.borderColor = '#E17052';
-        standardInputFirst.style.borderColor = 'var(--grey-50)';
         customInput.value = "";
+        numberOfErr++;
+    } else {
+        numOfPeopleErr.style.display = 'none';
+        standardInputSecond.style.borderColor = 'var(--grey-50)';
+    }
+
+    if (numberOfErr > 0) {
+        percentButton.forEach(button => button.classList.remove('pressed-button'));
+        console.log(numberOfErr)
         return false;
     }
 
-    standardInputFirst.style.borderColor = 'var(--grey-50)';
-    standardInputSecond.style.borderColor = 'var(--grey-50)';
-    numOfPeopleErr.style.display = 'none';
-    billAmountErr.style.display = 'none';
     return true;
 }
 
@@ -106,9 +133,10 @@ const selectCustomInput = () => {
 
         customInput.readOnly = false;
         percentButton.forEach(button => button.classList.remove('pressed-button'));
-        customInput.addEventListener('blur', handleCustomInput);
+        customInput.addEventListener('change', handleCustomInput);
     }
 }
+
 
 const calculateTipAndTotal = () => {
 
@@ -139,30 +167,10 @@ const showResults = (tipValue, totalValue) => {
     total.innerText = `$${totalValue}`;
 }
 
-const reset = () => {
-
-    form.reset();
-    tipAmount.innerText = "$0.00";
-    total.innerText = "$0.00";
-    tip = 0;
-    customInput.value = "";
-    percentButton.forEach(button => button.classList.remove('pressed-button'));
-
-    numOfPeopleErr.style.display = 'none';
-    billAmountErr.style.display = 'none';
-
-
-    resetBtn.classList.remove('reset-button-enabled');
-    resetBtn.classList.add('reset-button-disabled');
-    resetBtn.style.backgroundColor = '';
-    standardInputFirst.style.borderColor = 'var(--grey-50)';
-    standardInputSecond.style.borderColor = 'var(--grey-50)';
-    resetBtn.disabled = true;
-}
-
 
 const calculatorsResults = (e) => {
 
+    console.log('is valid ', validateInput())
     e.preventDefault();
 
     if (validateInput()) {
@@ -189,9 +197,9 @@ resetBtn.addEventListener('click', reset)
 
 // ---------------History script -----------------
 
-
 const tableBody = document.querySelector('.table-body');
-let rowId = 0
+let rowId = 0;
+
 const addBillToHistory = (billAmount, numPeople) => {
 
     const historyBillElement = document.createElement('tr')
@@ -209,21 +217,19 @@ const addBillToHistory = (billAmount, numPeople) => {
               <td><img src="./assets/Delete.svg" /></td> `;
 
     tableBody.appendChild(historyBillElement);
-
     const deleteButton = historyBillElement.querySelector('.delete-button')
 
     const handleDeleteHistoryElement = () => {
-        const index = history.findIndex(item => item.id === Number(historyBillElement.id))
 
+        const index = history.findIndex(item => item.id === Number(historyBillElement.id))
         if (index !== -1) {
+
             history.splice(index, 1);
-            console.log('updatedHistory ', history);
+            console.log('updatedHistory ', history); //Debugging
         }
 
         tableBody.removeChild(historyBillElement);
     }
 
     deleteButton.addEventListener('click', handleDeleteHistoryElement);
-
-
 };
