@@ -392,7 +392,15 @@ Breakpoints:
  }
 
 
- @media (min-width: 540px) {}
+ @media (min-width: 540px) and (max-width: 1023px) {
+
+     .tip-calculator,
+     .edit-container {
+
+         width: 540px;
+
+     }
+ }
 
 
 
