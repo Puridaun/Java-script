@@ -13,7 +13,7 @@
     />
   </head>
   <body>
-    <section class="tip-calculator-container">
+    <section class="tip-calculator-section">
       <img class="logo" src="./assets/SPLITTER.svg" />
       <div class="tip-calculator">
         <div class="tip-calculator-functional-side">
@@ -24,7 +24,7 @@
                 Amount must be greater than 0
               </p>
             </div>
-            <div class="input-container">
+            <div class="edit-input-container">
               <img class="dollar-img" src="./assets/$.svg" />
               <input
                 id="amount"
@@ -69,6 +69,11 @@
                   placeholder="0"
                 />
               </div>
+              <div>
+                <button type="button" class="access-history-btn hide-element">
+                  <img src="./assets/history.svg" />
+                </button>
+              </div>
             </div>
           </form>
         </div>
@@ -97,10 +102,9 @@
           </button>
         </div>
       </div>
-
       <!-- ----------Bill's tip history------------ -->
 
-      <div class="bills-tip-history">
+      <div class="bills-tip-history hide-element">
         <table class="history-table">
           <thead>
             <tr class="table-row-0" id="23">
@@ -114,6 +118,79 @@
           </thead>
           <tbody class="table-body"></tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- ----------------EDIT History------------------- -->
+
+    <section class="edit-history-section hide-element">
+      <div class="edit-container">
+        <div class="tip-calculator-functional-side">
+          <form class="tip-calculator-form">
+            <div>
+              <label class="standard-label" for="amount">Edit Bill</label>
+            </div>
+            <div class="edit-input-container">
+              <img class="dollar-img" src="./assets/$.svg" />
+              <input
+                id="amount"
+                type="number"
+                class="standard-edit-input edit-bill"
+                name="amount"
+                step="0.01"
+              />
+            </div>
+
+            <div class="select-tip-container">
+              <label class="standard-label" for="tip">Edit Tip %</label>
+
+              <input
+                type="number"
+                class="tip-edit-input"
+                name="custom-percent"
+              />
+
+              <div>
+                <label class="standard-label" for="number-of-people"
+                  >Edit Number of People</label
+                >
+              </div>
+              <div class="edit-input-container">
+                <img class="people-img" src="./assets/People.svg" />
+                <input
+                  type="number"
+                  id="nr-of-people"
+                  class="standard-edit-input edit-number-of-people"
+                  name="number-of-people"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="tip-calculator-results-side">
+          <div class="bill-split-results">
+            <div class="results-label">
+              <p>Tip Amount</p>
+              <p>/ person</p>
+            </div>
+            <p class="tip-amount-result">$0.00</p>
+          </div>
+          <div class="bill-split-results">
+            <div class="results-label">
+              <p>Total</p>
+              <p>/ person</p>
+            </div>
+            <p class="total-result">$0.00</p>
+          </div>
+
+          <button
+            type="button"
+            disabled="true"
+            class="save-button save-button-disabled"
+          >
+            SAVE
+          </button>
+        </div>
       </div>
     </section>
     <script src="script.js"></script>

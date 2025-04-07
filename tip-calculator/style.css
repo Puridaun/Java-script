@@ -50,7 +50,8 @@ Breakpoints:
 
  }
 
- .tip-calculator-container {
+ .tip-calculator-section,
+ .edit-history-section {
 
      display: flex;
      flex-direction: column;
@@ -65,7 +66,8 @@ Breakpoints:
      margin-bottom: 40px;
  }
 
- .tip-calculator {
+ .tip-calculator,
+ .edit-container {
      display: flex;
      flex-direction: column;
      gap: 48px;
@@ -75,6 +77,8 @@ Breakpoints:
      width: 100%;
 
  }
+
+
 
 
  /* --- Common --- */
@@ -87,7 +91,8 @@ Breakpoints:
      margin-bottom: 6px;
  }
 
- .standard-input {
+ .standard-input,
+ .standard-edit-input {
 
      line-height: 36px;
      padding-top: 6px;
@@ -107,13 +112,20 @@ Breakpoints:
      background-color: var(--grey-50);
  }
 
- .standard-input:hover {
+ .standard-edit-input {
+     color: var(--grey-400);
+     font-weight: 700;
+ }
+
+ .standard-input:hover,
+ .standard-edit-input:hover {
      border-color: var(--green-400);
  }
 
 
 
- .input-container {
+ .input-container,
+ .edit-input-container {
      position: relative;
  }
 
@@ -168,6 +180,7 @@ Breakpoints:
 
 
 
+
  /* ---END Common --- */
 
 
@@ -175,17 +188,20 @@ Breakpoints:
      margin-top: 40px;
  }
 
- .input-container {
+ .input-container,
+ .edit-input-container {
      position: relative;
  }
 
- .input-container img {
+ .input-container img,
+ .edit-input-container img {
      position: absolute;
      top: 18px;
      left: 20px;
  }
 
- .tip-calculator-percent-buttons {
+ .tip-calculator-percent-buttons,
+ .custom-input {
      display: grid;
      grid-template-columns: 1fr 1fr;
      gap: 16px;
@@ -193,7 +209,8 @@ Breakpoints:
      margin-bottom: 40px;
  }
 
- .custom-button {
+ .custom-button,
+ .tip-edit-input {
      padding: 4px 8px;
      background-color: var(--grey-50);
      color: var(--grey-400);
@@ -210,16 +227,49 @@ Breakpoints:
      border-style: solid;
      outline: none;
      width: 100%;
-
  }
 
- .custom-button:hover {
+ .tip-edit-input {
+     margin-top: 16px;
+     margin-bottom: 40px;
+     line-height: 36px;
+     font-size: 24px;
+     text-align: right;
+ }
+
+ .custom-button:hover,
+ .tip-edit-input:hover {
      border-color: var(--green-400);
  }
 
  .custom-button::placeholder {
 
      color: var(--grey-400);
+ }
+
+ .access-history-btn {
+
+     margin-left: auto;
+     margin-right: auto;
+     display: block;
+     padding: 4px;
+     margin-top: 16px;
+     background-color: white;
+     cursor: pointer;
+     overflow: hidden;
+     border: none;
+ }
+
+ .access-history-btn img {
+     display: block;
+     margin-top: auto;
+     margin-bottom: auto;
+ }
+
+ .access-history-btn:hover {
+     border-radius: 16px;
+     background-color: var(--green-400);
+
  }
 
  .tip-calculator-results-side {
@@ -243,10 +293,11 @@ Breakpoints:
      font-size: 13px;
  }
 
- .reset-button {
+ .reset-button,
+ .save-button {
      max-width: 320px;
      height: 48px;
-     width: 280px;
+     width: 100%;
      border: none;
      padding: 4px;
      color: var(--green-900);
@@ -258,11 +309,15 @@ Breakpoints:
      margin-right: auto;
  }
 
- .reset-button-enabled {
+
+
+ .reset-button-enabled,
+ .save-button-enabled {
      background-color: var(--green-400);
  }
 
- .reset-button-enabled:hover {
+ .reset-button-enabled:hover,
+ .save-button-enabled:hover {
      background-color: #9FE8DF;
  }
 
@@ -284,10 +339,12 @@ Breakpoints:
 
  @media (min-width: 1024px) {
 
+
      body,
      html {
          height: 100%;
      }
+
 
      .tip-calculator-form {
          width: 380px;
@@ -298,7 +355,8 @@ Breakpoints:
          margin-bottom: 88px;
      }
 
-     .tip-calculator {
+     .tip-calculator,
+     .edit-container {
 
          flex-direction: row;
 
@@ -309,6 +367,11 @@ Breakpoints:
          width: 320px;
      }
 
+     .save-button {
+         margin-top: 88px;
+         width: 320px;
+     }
+
      .total-result,
      .tip-amount-result {
 
@@ -316,7 +379,8 @@ Breakpoints:
      }
 
 
-     .tip-calculator-percent-buttons {
+     .tip-calculator-percent-buttons,
+     .custom-input {
 
          grid-template-columns: 1fr 1fr 1fr;
      }
@@ -326,6 +390,9 @@ Breakpoints:
      }
 
  }
+
+
+ @media (min-width: 540px) {}
 
 
 
@@ -385,4 +452,12 @@ Breakpoints:
      td {
          font-size: 16px;
      }
+ }
+
+
+
+ /* ----------Overwriting classes----------- */
+
+ .hide-element {
+     display: none;
  }

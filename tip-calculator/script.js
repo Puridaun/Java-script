@@ -12,6 +12,10 @@ const numOfPeopleErr = document.querySelector('.num-of-people-error');
 const standardInputFirst = document.querySelector('.standard-input-first');
 const standardInputSecond = document.querySelector('.standard-input-second');
 const customInput = document.querySelector('.custom-button');
+const accessHistoryBtn = document.querySelector('.access-history-btn')
+const editHistory = document.querySelector('.edit-history-section')
+const calculatorSection = document.querySelector('.tip-calculator-section')
+
 
 let numberOfErr = 0;
 
@@ -22,7 +26,10 @@ let tipPerPerson = 0;
 let totalPerPerson = 0;
 
 // ---------------History variables -----------------
+const historySection = document.querySelector('.bills-tip-history');
 const historyTable = document.querySelector('.history-table');
+
+let hideElement = true;
 
 //Date
 const today = new Date;
@@ -165,6 +172,11 @@ const showResults = (tipValue, totalValue) => {
 
     tipAmount.innerText = `$${tipValue}`;
     total.innerText = `$${totalValue}`;
+
+    if (hideElement) {
+
+        accessHistoryBtn.classList.remove('hide-element');
+    }
 }
 
 
@@ -182,7 +194,7 @@ const calculatorsResults = (e) => {
 }
 
 
-// --- Events ---
+// -------------------- Events -------------------
 
 
 form.addEventListener('submit', (e) => {
@@ -193,6 +205,8 @@ form.addEventListener('submit', (e) => {
 customInput.addEventListener('click', selectCustomInput)
 
 resetBtn.addEventListener('click', reset)
+
+
 
 
 // ---------------History script -----------------
@@ -214,10 +228,13 @@ const addBillToHistory = (billAmount, numPeople) => {
                     <img src="./assets/Delete.svg" />
                 </button>
               </td>
-              <td><img src="./assets/Delete.svg" /></td> `;
+              <td><button class="edit-button">
+                    <img src="./assets/edit-text.svg" />
+                </button></td> `;
 
     tableBody.appendChild(historyBillElement);
     const deleteButton = historyBillElement.querySelector('.delete-button')
+    const editButton = historyBillElement.querySelector('.edit-button')
 
     const handleDeleteHistoryElement = () => {
 
@@ -226,10 +243,51 @@ const addBillToHistory = (billAmount, numPeople) => {
 
             history.splice(index, 1);
             console.log('updatedHistory ', history); //Debugging
+
+            if (history.length === 0) {
+
+                accessHistoryBtn.classList.add('hide-element');
+
+                historySection.classList.add('hide-element');
+            }
+
+
         }
 
         tableBody.removeChild(historyBillElement);
     }
 
+    // --------------------------EDIT HISTORY script -----------------------------
+    const handleEditHistoryElement = () => {
+        const editBill = document.querySelector('.edit-bill')
+        const tipEditInput = document.querySelector('.tip-edit-input')
+        const editNumberOfPeople = document.querySelector('.edit-number-of-people')
+
+        const index = history.findIndex(item => item.id === Number(historyBillElement.id))
+        console.log(history[index].bill)
+        editBill.value = history[index].bill
+        tipEditInput.value = history[index].billTip
+        editNumberOfPeople.value = history[index].numberOfPeople
+
+        calculatorSection.classList.add('hide-element')
+        editHistory.classList.remove('hide-element')
+
+
+    }
+
     deleteButton.addEventListener('click', handleDeleteHistoryElement);
+    editButton.addEventListener('click', handleEditHistoryElement);
 };
+
+const showHistory = () => {
+
+    percentButton.forEach(button => button.classList.remove('pressed-button'));
+    historySection.classList.toggle('hide-element')
+}
+
+accessHistoryBtn.addEventListener('click', showHistory)
+
+
+
+// --------------------------EDIT HISTORY script -----------------------------
+
