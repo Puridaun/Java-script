@@ -257,3 +257,6 @@ let numbersAverage = sumOfNumbers / numbers.length;
 
 
 console.log(numbersAverage.toFixed(2))
+
+
+

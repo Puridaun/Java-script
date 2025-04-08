@@ -315,7 +315,7 @@ const updateStatistics = () => {
     for (i = 0; i < history.length; i++) {
 
         billSum += history[i].bill;
-        tipSum += history[i].billTip;
+        tipSum += Number(history[i].billTip);
 
         if (history[i].bill > max) {
             max = history[i].bill;
