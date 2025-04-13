@@ -1,0 +1,271 @@
+ * {
+     margin: 0px;
+     padding: 0px;
+     box-sizing: border-box;
+     font-family: "Space Grotesk", sans-serif;
+ }
+
+ :root {
+     --Light-grey: #DFDEE0;
+     --Deep-violet: #21092F;
+     --Grey: rgba(0, 0, 0, 0.25);
+     --Grey-dark: #2F2F2F;
+     --Purplish-grey: #ADB5BE;
+ }
+
+ /* 
+Breakpoints:
+640px
+768px
+1024px
+1280px
+1536px
+*/
+
+
+
+
+ .front-and-back-side-card-container {
+     background-image: url(./assets/Mask.svg);
+     height: 240px;
+     width: 100%;
+     padding: 32px 16px;
+
+ }
+
+ .front-and-back-side-card-images {
+     position: relative;
+ }
+
+ .back-side {
+     background-image: url(./assets/Card-back-side.svg);
+     height: 157px;
+     width: 286px;
+     background-repeat: no-repeat;
+     position: absolute;
+     right: 0px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 16px;
+
+ }
+
+ /* ----------------COMMON START--------------- */
+
+
+ .card-form-info {
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+ }
+
+ .std-input {
+     width: 100%;
+     padding: 12px 11px;
+     border-radius: 8px;
+     border: 1px solid var(--Light-grey);
+     font-size: 16px;
+     font-weight: 500;
+ }
+
+ .std-input-label {
+     font-size: 12px;
+     letter-spacing: 1.5px;
+     font-weight: 500;
+ }
+
+ .text-shadow {
+     text-shadow: 0px 4px 4px var(--Grey);
+     color: var(--Deep-violet);
+
+ }
+
+
+
+
+
+
+
+
+ /* ----------------COMMON END--------------- */
+
+
+
+
+ /* -----------------CARD BACK SIDE STYLE START---------------- */
+
+
+ .back-side-black-rectangle {
+     width: 100%;
+     background-color: var(--Grey-dark);
+     height: 40px;
+     margin-top: 16px;
+     border: none;
+ }
+
+ .back-side-cvc-number {
+     width: 80%;
+     padding: 8px;
+     font-size: 8px;
+     color: white;
+     text-align: right;
+     background-color: var(--Purplish-grey);
+     border-radius: 3px;
+
+ }
+
+
+
+
+
+ /* -----------------CARD BACK SIDE STYLE END---------------- */
+
+
+
+ /* -----------------CARD FRONT SIDE STYLE START---------------- */
+
+ .front-side {
+     background-image: url(./assets/Card-front-side.svg);
+     height: 157px;
+     width: 286px;
+     background-repeat: no-repeat;
+     position: absolute;
+     top: 96px;
+     padding: 20px;
+ }
+
+ .card-logo {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+ }
+
+ .big-circle {
+     background-color: white;
+     width: 32px;
+     height: 32px;
+     border-radius: 50%;
+ }
+
+ .small-circle {
+
+     width: 13px;
+     height: 13px;
+     border-radius: 50%;
+     border: 1px solid white;
+ }
+
+ .card-16-digit-number {
+     font-weight: 300;
+     color: white;
+     letter-spacing: 2.2px;
+     font-size: 18px;
+     margin-top: 37px;
+ }
+
+ .card-owner-info {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-top: 16px;
+ }
+
+ .owner-name {
+     color: white;
+     font-size: 8px;
+     letter-spacing: 1.3px;
+
+ }
+
+ .card-expire-date {
+     color: white;
+     font-size: 8px;
+     letter-spacing: 1.3px;
+
+ }
+
+ /* -----------------CARD FRONT SIDE STYLE END---------------- */
+
+
+
+ /* ----------- CARD FORM START---------------- */
+
+ .card-form {
+     margin-top: 91px;
+     padding-left: 24px;
+     padding-right: 24px;
+     display: flex;
+     flex-direction: column;
+     gap: 20px;
+
+ }
+
+ .card-expire-date-and-cvc {
+     display: flex;
+     flex-direction: row;
+
+ }
+
+ .card-info-MM-YY,
+ .card-info-CVC {
+     display: flex;
+     flex-direction: column;
+     gap: 8px;
+ }
+
+ .card-expire-date-inputs {
+     display: flex;
+     flex-direction: row;
+     gap: 8px;
+     width: 154px;
+ }
+
+
+ button {
+     width: 100%;
+     padding-top: 16px;
+     padding-bottom: 16px;
+     border-radius: 8px;
+     border: none;
+     background-color: var(--Deep-violet);
+     color: white;
+     font-size: 16px;
+     letter-spacing: 1.5px;
+     /* margin-bottom: 48px; */
+ }
+
+ /* ----------- CARD FORM END---------------- */
+
+
+
+ .card-after-confirm-button {
+     margin-top: 91px;
+     padding-left: 24px;
+     padding-right: 24px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+
+
+ }
+
+ .card-after-confirm-button img {
+     width: 80px;
+ }
+
+ .card-after-confirm-button h2 {
+     margin-top: 35px;
+ }
+
+ .card-after-confirm-button p {
+     margin-top: 16px;
+ }
+
+ .continue-button {
+     margin-top: 48px;
+ }
+
+ .hide {
+     display: none;
+ }
