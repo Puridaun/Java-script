@@ -4,6 +4,9 @@ const cardHolderName = document.querySelector(".owner-name");
 const cardNumber = document.querySelector(".card-16-digit-number");
 const cardExpireDate = document.querySelector(".card-expire-date");
 const cardCvc = document.querySelector(".back-side-cvc-number");
+const afterConfirmButton = document.querySelector(".card-after-confirm-button");
+const formToConfirm = document.querySelector(".card-form");
+const continueButton = document.querySelector('.continue-button')
 
 // ---------------HTML INPUTS
 const cardNameInput = document.querySelector('.card-name-input')
@@ -12,11 +15,21 @@ const cardMonthInput = document.querySelector('.card-month-input')
 const cardYearInput = document.querySelector('.card-year-input')
 const cardCvcInput = document.querySelector('.card-cvc-input')
 
-
+// --------------HTLM LABELS
+const cardNameErr = document.querySelector('.name-error')
+const cardNumberFormatErr = document.querySelector('.number-format-label-error')
+const cardNumberEmptyErr = document.querySelector('.number-empty-label-error')
+const expDateLabelErr = document.querySelector('.exp-date-error')
+const cardCvcErr = document.querySelector('.cvc-label-error')
+const cardCvcFormatErr = document.querySelector('.format-cvc-label-error')
 
 // -------------------Variables
 let card = [];
 
+const nameInnerText = cardHolderName.innerHTML
+const numberInnerText = cardNumber.innerHTML
+const dateInnerText = cardExpireDate.innerHTML
+const cvcInnerText = cardCvc.innerHTML
 
 
 // ------------------Functions
@@ -54,6 +67,10 @@ const getInputsValue = (e) => {
 
     changeCardInfo()
 
+    afterConfirmButton.classList.remove('hide')
+    formToConfirm.classList.add('hide')
+
+
 };
 
 
@@ -79,40 +96,142 @@ const handleCardNumberInput = () => {
     cardNumberInput.value = outputValue;
 }
 
+const backToResetForm = () => {
+
+    afterConfirmButton.classList.add('hide')
+    formToConfirm.classList.remove('hide')
+
+    formToConfirm.reset();
+
+    cardHolderName.innerHTML = nameInnerText;
+    cardNumber.innerHTML = numberInnerText;
+    cardExpireDate.innerHTML = dateInnerText;
+    cardCvc.innerHTML = cvcInnerText
+
+}
 
 const areInputsValid = () => {
     let numberOfErr = 0;
 
     if (cardNameInput.value === "") {
+
+        // Label
+        cardNameErr.classList.remove('hide')
+        // Input
+        cardNameInput.classList.add('input-error')
         numberOfErr++
+    } else {
+
+        // Label
+        cardNameErr.classList.add('hide')
+        // Input
+        cardNameInput.classList.remove('input-error')
     }
+
+    // Card Number input-------------------------------
 
     if (cardNumberInput.value === "") {
-        numberOfErr++
-    }
 
-    console.log(Number(cardNumberInput.value))
+        // Label error
+        cardNumberFormatErr.classList.add('hide')
+        cardNumberEmptyErr.classList.remove('hide')
+
+        // Input error
+        cardNumberInput.classList.add('input-error')
+        numberOfErr++
+    } else {
+
+        // Label 
+        cardNumberEmptyErr.classList.add('hide')
+        // Input error
+        cardNumberInput.classList.remove('input-error')
+    }
 
     if (isNaN(Number(cardNumberInput.value))) {
-        console.log("good")
+
+        // Label error
+        cardNumberEmptyErr.classList.add('hide')
+        cardNumberFormatErr.classList.remove('hide')
+        // Input error
+        cardNumberInput.classList.add('input-error')
+        numberOfErr++
+    } else {
+
+        // Label 
+        cardNumberFormatErr.classList.add('hide')
+        // Input error
+
     }
 
+    // Month input-------------------------------
 
     if (cardMonthInput.value === "") {
+
+        // Label error
+        expDateLabelErr.classList.remove('hide')
+        // Input error
+        cardMonthInput.classList.add('input-error')
         numberOfErr++
+    } else {
+
+        // Label error
+        expDateLabelErr.classList.add('hide')
+        // Input error
+        cardMonthInput.classList.remove('input-error')
     }
+
+    // Year input-------------------------------
 
     if (cardYearInput.value === "") {
+
+        // Label error
+        expDateLabelErr.classList.remove('hide')
+        // Input error
+        cardYearInput.classList.add('input-error')
         numberOfErr++
+    } else {
+
+        // Input error
+        cardYearInput.classList.remove('input-error')
     }
 
+
+
+    // CVC input-------------------------------
+
     if (cardCvcInput.value === "") {
+
+        // Label error
+        cardCvcErr.classList.remove('hide')
+        // Input error
+        cardCvcInput.classList.add('input-error')
         numberOfErr++
+    } else {
+
+        // Label
+        cardCvcErr.classList.add('hide')
+        // Input error
+        cardCvcInput.classList.remove('input-error')
+    }
+
+    if (cardCvcInput.value.length !== 3 && cardCvcInput.value !== "") {
+
+        // Label error
+        cardCvcErr.classList.add('hide')
+        cardCvcFormatErr.classList.remove('hide')
+        // Input error
+        cardCvcInput.classList.add('input-error')
+        numberOfErr++
+    } else {
+
+        // Label error
+        cardCvcFormatErr.classList.add('hide')
     }
 
     if (numberOfErr > 0) {
         return false
     }
+
 
     return true
 }
@@ -122,3 +241,5 @@ const areInputsValid = () => {
 confirmBtn.addEventListener("click", getInputsValue)
 
 cardNumberInput.addEventListener("input", handleCardNumberInput)
+
+continueButton.addEventListener('click', backToResetForm)

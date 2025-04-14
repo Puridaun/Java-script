@@ -13,7 +13,7 @@
     <title>Interactive-card-details-form</title>
   </head>
   <body>
-    <head class="interactive-card-container">
+    <section class="interactive-card-container">
       <div class="front-and-back-side-card-container">
         <div class="front-and-back-side-card-images">
           <div class="back-side">
@@ -35,9 +35,12 @@
       </div>
       <form class="card-form">
         <div class="card-form-info">
-          <label for="name" class="std-input-label text-shadow"
-            >CARDHOLDER NAME</label
-          >
+          <div>
+            <label for="name" class="std-input-label text-shadow"
+              >CARDHOLDER NAME</label
+            >
+            <label class="name-imput-error"></label>
+          </div>
           <input
             type="text"
             id="name"
@@ -45,6 +48,9 @@
             class="std-input card-name-input"
             placeholder="e.g Jane Appleseed"
           />
+          <label class="std-input-label name-error label-error hide"
+            >Can't be blank</label
+          >
         </div>
         <div class="card-form-info">
           <label for="card-number" class="std-input-label text-shadow"
@@ -58,6 +64,14 @@
             maxlength="19"
             placeholder="e.g 1234 5678 9123 0000"
           />
+          <label
+            class="std-input-label number-empty-label-error label-error hide"
+            >Can't be blank</label
+          >
+          <label
+            class="std-input-label number-format-label-error label-error hide"
+            >Wrong format, only numbers</label
+          >
         </div>
         <div class="card-form-info card-expire-date-and-cvc">
           <div class="card-info-MM-YY">
@@ -78,6 +92,9 @@
                 placeholder="YY"
               />
             </div>
+            <label class="std-input-label exp-date-error label-error hide"
+              >Can't be blank</label
+            >
           </div>
           <div class="card-info-CVC">
             <label for="card-CVC" class="std-input-label">CVC</label>
@@ -88,6 +105,13 @@
               class="std-input card-cvc-input"
               placeholder="e.g 123"
             />
+            <label class="std-input-label cvc-label-error label-error hide"
+              >Can't be blank</label
+            >
+            <label
+              class="std-input-label format-cvc-label-error label-error hide"
+              >Must contain 3 digit number</label
+            >
           </div>
         </div>
         <button type="submit" class="confirm-button">Confirm</button>
@@ -98,7 +122,7 @@
         <p>We've added your card details</p>
         <button type="button" class="continue-button">Continue</button>
       </div>
-    </head>
+    </section>
     <script src="script.js"></script>
   </body>
 </html>

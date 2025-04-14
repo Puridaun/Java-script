@@ -11,6 +11,8 @@
      --Grey: rgba(0, 0, 0, 0.25);
      --Grey-dark: #2F2F2F;
      --Purplish-grey: #ADB5BE;
+     --Red: #FF5050;
+     --Purple: #610595;
  }
 
  /* 
@@ -35,21 +37,10 @@ Breakpoints:
 
  .front-and-back-side-card-images {
      position: relative;
+     background-color: red;
  }
 
- .back-side {
-     background-image: url(./assets/Card-back-side.svg);
-     height: 157px;
-     width: 286px;
-     background-repeat: no-repeat;
-     position: absolute;
-     right: 0px;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 16px;
 
- }
 
  /* ----------------COMMON START--------------- */
 
@@ -67,6 +58,11 @@ Breakpoints:
      border: 1px solid var(--Light-grey);
      font-size: 16px;
      font-weight: 500;
+
+ }
+
+ .std-input:hover {
+     border-color: var(--Purple);
  }
 
  .std-input-label {
@@ -75,6 +71,8 @@ Breakpoints:
      font-weight: 500;
  }
 
+
+
  .text-shadow {
      text-shadow: 0px 4px 4px var(--Grey);
      color: var(--Deep-violet);
@@ -82,9 +80,21 @@ Breakpoints:
  }
 
 
+ .input-error {
+     border-color: var(--Red);
+ }
+
+ .label-error {
+     color: var(--Red);
+ }
 
 
 
+ input[type=number]::-webkit-outer-spin-button,
+ input[type=number]::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+ }
 
 
 
@@ -94,7 +104,19 @@ Breakpoints:
 
 
  /* -----------------CARD BACK SIDE STYLE START---------------- */
+ .back-side {
+     background-image: url(./assets/Card-back-side.svg);
+     height: 157px;
+     width: 286px;
+     background-repeat: no-repeat;
+     position: absolute;
+     right: 0px;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 16px;
 
+ }
 
  .back-side-black-rectangle {
      width: 100%;
@@ -114,8 +136,6 @@ Breakpoints:
      border-radius: 3px;
 
  }
-
-
 
 
 
@@ -207,11 +227,14 @@ Breakpoints:
 
  }
 
+
  .card-info-MM-YY,
  .card-info-CVC {
      display: flex;
      flex-direction: column;
+     justify-content: center;
      gap: 8px;
+     width: 100%;
  }
 
  .card-expire-date-inputs {
@@ -221,6 +244,10 @@ Breakpoints:
      width: 154px;
  }
 
+ .card-year-input,
+ .card-month-input {
+     text-align: center;
+ }
 
  button {
      width: 100%;
@@ -232,10 +259,12 @@ Breakpoints:
      color: white;
      font-size: 16px;
      letter-spacing: 1.5px;
-     /* margin-bottom: 48px; */
+     margin-bottom: 48px;
  }
 
  /* ----------- CARD FORM END---------------- */
+
+
 
 
 
@@ -268,4 +297,186 @@ Breakpoints:
 
  .hide {
      display: none;
+ }
+
+
+
+
+
+ @media (min-width: 640px) {
+
+
+     .back-side-cvc-number {
+
+         font-size: 12px;
+     }
+
+     .owner-name {
+
+         font-size: 12px;
+     }
+
+     .card-expire-date {
+
+         font-size: 12px;
+     }
+ }
+
+
+
+ @media (min-width: 768px) {
+
+     .front-and-back-side-card-container {
+         padding: 32px 64px;
+     }
+
+     .card-form {
+         padding-left: 80px;
+         padding-right: 80px;
+     }
+ }
+
+
+ @media (min-width: 1024px) {
+
+     .interactive-card-container {
+         display: flex;
+         align-items: center;
+         padding-right: 64px;
+     }
+
+     .front-and-back-side-card-container {
+
+         height: 100vh;
+         width: 480px;
+         padding-top: 186px;
+         padding-bottom: 186px;
+         padding-left: 64px;
+         padding-right: 0px;
+     }
+
+
+
+
+
+     /* --Front side */
+
+     .front-side {
+
+         background: linear-gradient(90deg, rgba(99, 72, 254, 1) 0%, rgba(97, 5, 149, 1) 100%);
+         border-radius: 8px;
+         height: 225px;
+         width: 427px;
+         padding: 26px 32px;
+         left: 0px;
+         top: 0px;
+
+     }
+
+     .card-logo {
+
+         gap: 8px;
+     }
+
+     .big-circle {
+
+         width: 48px;
+         height: 48px;
+         border-radius: 50%;
+     }
+
+     .small-circle {
+
+         width: 24px;
+         height: 24px;
+     }
+
+     .card-16-digit-number {
+
+         font-size: 20px;
+         margin-top: 56px;
+     }
+
+     .card-owner-info {
+
+         margin-top: 24px;
+     }
+
+     .owner-name {
+
+         font-size: 14px;
+     }
+
+     .card-expire-date {
+
+         font-size: 14px;
+     }
+
+     /* Back Side */
+
+     .back-side {
+         background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(210, 211, 217, 1) 100%);
+         height: 225px;
+         width: 427px;
+         border-radius: 8px;
+         border: 0px;
+         left: 74px;
+         top: 264px;
+
+     }
+
+     .back-side-black-rectangle {
+
+         height: 54px;
+         margin-top: 32px;
+     }
+
+     .back-side-cvc-number {
+
+         padding: 10px;
+         font-size: 14px;
+     }
+
+
+
+     /* Form */
+
+     .card-form {
+         margin-left: 240px;
+         padding-left: 24px;
+         padding-right: 24px;
+         display: flex;
+         flex-direction: column;
+         gap: 32px;
+
+     }
+ }
+
+
+ @media (min-width: 1280px) {
+
+     .front-and-back-side-card-container {
+
+         padding-left: 156px;
+     }
+
+     .front-side {
+
+         height: 245px;
+         width: 447px;
+     }
+
+     .back-side {
+
+         height: 245px;
+         width: 447px;
+         left: 94px;
+         top: 284px;
+     }
+
+     .card-form {
+
+         margin-left: 350px;
+
+     }
  }
