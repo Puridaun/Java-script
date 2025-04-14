@@ -147,7 +147,9 @@ const areInputsValid = () => {
         cardNumberInput.classList.remove('input-error')
     }
 
-    if (isNaN(Number(cardNumberInput.value))) {
+    const cardNumberNoSpaces = cardNumberInput.value.replaceAll(" ", '');
+
+    if (isNaN(Number(cardNumberNoSpaces))) {
 
         // Label error
         cardNumberEmptyErr.classList.add('hide')

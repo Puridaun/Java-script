@@ -269,37 +269,35 @@ Breakpoints:
 
 
  .card-after-confirm-button {
+
      margin-top: 91px;
      padding-left: 24px;
      padding-right: 24px;
      display: flex;
      flex-direction: column;
      align-items: center;
-
-
  }
 
  .card-after-confirm-button img {
+
      width: 80px;
  }
 
+
  .card-after-confirm-button h2 {
+
      margin-top: 35px;
  }
 
  .card-after-confirm-button p {
+
      margin-top: 16px;
  }
 
  .continue-button {
+
      margin-top: 48px;
  }
-
- .hide {
-     display: none;
- }
-
-
 
 
 
@@ -331,6 +329,12 @@ Breakpoints:
      }
 
      .card-form {
+         padding-left: 80px;
+         padding-right: 80px;
+     }
+
+     .card-after-confirm-button {
+
          padding-left: 80px;
          padding-right: 80px;
      }
@@ -450,6 +454,35 @@ Breakpoints:
          gap: 32px;
 
      }
+
+
+     /* After Confirm button */
+
+     .card-after-confirm-button {
+
+         margin-left: 160px;
+         padding-left: 24px;
+         padding-right: 24px;
+         display: flex;
+         flex-direction: column;
+     }
+
+     .card-after-confirm-button img {
+         width: 80px;
+     }
+
+     .card-after-confirm-button h2 {
+         margin-top: 34px;
+     }
+
+     .card-after-confirm-button p {
+         margin-top: 16px;
+     }
+
+     .continue-button {
+         margin-top: 48px;
+     }
+
  }
 
 
@@ -479,4 +512,21 @@ Breakpoints:
          margin-left: 350px;
 
      }
+
+     .card-after-confirm-button {
+
+         margin-left: 350px;
+         padding-left: 24px;
+         padding-right: 24px;
+         display: flex;
+         flex-direction: column;
+     }
+ }
+
+
+
+ /*Must be Last css class selector */
+
+ .hide {
+     display: none;
  }
