@@ -17,7 +17,6 @@ const cardCvcInput = document.querySelector('.card-cvc-input')
 
 // --------------HTLM LABELS
 const cardNameErr = document.querySelector('.name-error')
-const cardNameFormatErr = document.querySelector('.name-format-error')
 const cardNumberFormatErr = document.querySelector('.number-format-label-error')
 const cardNumberEmptyErr = document.querySelector('.number-empty-label-error')
 const expDateLabelErr = document.querySelector('.exp-date-error')
@@ -143,8 +142,8 @@ const checkValueOfYearInput = () => {
     if (inputValue.length === 4) {
         if (inputValue < 2026) {
 
-            dateFormatErrTwo.classList.add('hide')
-            dateFormatErrOne.classList.remove('hide')
+            expDateLabelErr.innerText = 'Year expired';
+            expDateLabelErr.classList.remove('hide')
             return
 
         }
@@ -154,8 +153,8 @@ const checkValueOfYearInput = () => {
     if (inputValue.length === 4) {
         if (inputValue > 2045) {
 
-            dateFormatErrOne.classList.add('hide')
-            dateFormatErrTwo.classList.remove('hide')
+            expDateLabelErr.innerText = 'Year too high';
+            expDateLabelErr.classList.remove('hide')
             return
 
         }
@@ -171,8 +170,7 @@ const checkValueOfYearInput = () => {
 
         cardYearInput.value = inputValue % 100
 
-        dateFormatErrOne.classList.add('hide')
-        dateFormatErrTwo.classList.add('hide')
+        expDateLabelErr.classList.add('hide')
         cardCvcInput.focus()
     }
 
@@ -187,16 +185,20 @@ const checkNameFormat = () => {
     for (i = 0; i < name.length; i++) {
         if (forbiddenChar.includes(name[i])) {
 
-            cardNameFormatErr.classList.remove('hide')
+            cardNameErr.innerText = "Wrong format, only letters"
+            cardNameErr.classList.remove('hide')
             return cardNameInput.value = ""
         }
     }
 
-    cardNameFormatErr.classList.add('hide')
+    cardNameErr.classList.add('hide')
 }
 
 const areInputsValid = () => {
+
     let numberOfErr = 0;
+    cardNameErr.innerText = "This field is required"
+    expDateLabelErr.innerText = "Can't be blank"
 
     if (cardNameInput.value === "") {
 
@@ -332,5 +334,7 @@ cardNumberInput.addEventListener("input", handleCardNumberInput)
 continueButton.addEventListener('click', backToResetForm)
 
 cardMonthInput.addEventListener('input', checkValueOfMonthInput)
+
 cardYearInput.addEventListener('input', checkValueOfYearInput)
+
 cardNameInput.addEventListener('input', checkNameFormat)
