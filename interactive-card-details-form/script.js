@@ -26,10 +26,7 @@ const cardCvcFormatErr = document.querySelector('.format-cvc-label-error')
 // -------------------Variables
 let card = [];
 
-const nameInnerText = cardHolderName.innerHTML
-const numberInnerText = cardNumber.innerHTML
-const dateInnerText = cardExpireDate.innerHTML
-const cvcInnerText = cardCvc.innerHTML
+
 
 
 // ------------------Functions
@@ -103,10 +100,10 @@ const backToResetForm = () => {
 
     formToConfirm.reset();
 
-    cardHolderName.innerHTML = nameInnerText;
-    cardNumber.innerHTML = numberInnerText;
-    cardExpireDate.innerHTML = dateInnerText;
-    cardCvc.innerHTML = cvcInnerText
+    cardHolderName.innerHTML = "JANE APPLESEED";
+    cardNumber.innerHTML = "0000 0000 0000 0000";
+    cardExpireDate.innerHTML = "00/00";
+    cardCvc.innerHTML = "000"
 
 }
 

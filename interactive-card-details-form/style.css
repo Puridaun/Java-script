@@ -28,16 +28,17 @@ Breakpoints:
 
 
  .front-and-back-side-card-container {
-     background-image: url(./assets/Mask.svg);
+
+     background-color: var(--Deep-violet);
      height: 240px;
      width: 100%;
      padding: 32px 16px;
-
  }
 
  .front-and-back-side-card-images {
+
      position: relative;
-     background-color: red;
+
  }
 
 
@@ -352,15 +353,23 @@ Breakpoints:
      .front-and-back-side-card-container {
 
          height: 100vh;
-         width: 480px;
+         width: 400px;
          padding-top: 186px;
          padding-bottom: 186px;
          padding-left: 64px;
          padding-right: 0px;
+         display: flex;
+
      }
 
 
-
+     .front-and-back-side-card-images {
+         position: static;
+         display: flex;
+         flex-direction: column-reverse;
+         justify-content: center;
+         gap: 48px;
+     }
 
 
      /* --Front side */
@@ -372,9 +381,7 @@ Breakpoints:
          height: 225px;
          width: 427px;
          padding: 26px 32px;
-         left: 0px;
-         top: 0px;
-
+         position: static;
      }
 
      .card-logo {
@@ -424,9 +431,8 @@ Breakpoints:
          width: 427px;
          border-radius: 8px;
          border: 0px;
-         left: 74px;
-         top: 264px;
-
+         position: static;
+         margin-left: 96px;
      }
 
      .back-side-black-rectangle {
@@ -460,7 +466,7 @@ Breakpoints:
 
      .card-after-confirm-button {
 
-         margin-left: 160px;
+         margin-left: 240px;
          padding-left: 24px;
          padding-right: 24px;
          display: flex;
@@ -480,6 +486,7 @@ Breakpoints:
      }
 
      .continue-button {
+         width: 380px;
          margin-top: 48px;
      }
 
@@ -491,6 +498,7 @@ Breakpoints:
      .front-and-back-side-card-container {
 
          padding-left: 156px;
+         width: 480px;
      }
 
      .front-side {
