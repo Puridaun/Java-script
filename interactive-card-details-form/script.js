@@ -17,15 +17,18 @@ const cardCvcInput = document.querySelector('.card-cvc-input')
 
 // --------------HTLM LABELS
 const cardNameErr = document.querySelector('.name-error')
+const cardNameFormatErr = document.querySelector('.name-format-error')
 const cardNumberFormatErr = document.querySelector('.number-format-label-error')
 const cardNumberEmptyErr = document.querySelector('.number-empty-label-error')
 const expDateLabelErr = document.querySelector('.exp-date-error')
+const dateFormatErrOne = document.querySelector('.date-format-error1')
+const dateFormatErrTwo = document.querySelector('.date-format-error2')
 const cardCvcErr = document.querySelector('.cvc-label-error')
 const cardCvcFormatErr = document.querySelector('.format-cvc-label-error')
 
 // -------------------Variables
 let card = [];
-
+const forbiddenChar = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '/', '!', '@', '.', '#', '$', '%', '&']
 
 
 
@@ -88,8 +91,6 @@ const handleCardNumberInput = () => {
         }
     }
 
-    console.log(inputValue, outputValue)
-
     cardNumberInput.value = outputValue;
 }
 
@@ -105,6 +106,93 @@ const backToResetForm = () => {
     cardExpireDate.innerHTML = "00/00";
     cardCvc.innerHTML = "000"
 
+}
+
+const checkValueOfMonthInput = () => {
+
+    const inputValue = cardMonthInput.value;
+
+    console.log(inputValue)
+    if (inputValue.length === 2 && inputValue < 13) {
+
+        cardYearInput.focus()
+    }
+
+    if (inputValue > 0 && inputValue < 10 && inputValue.length < 2) {
+
+        cardMonthInput.value = "0" + inputValue
+    }
+
+    if (inputValue < 13 && inputValue > 9) {
+
+        cardMonthInput.value = Number(inputValue)
+        cardYearInput.focus()
+    }
+
+    if (inputValue > 13) {
+
+        return cardMonthInput.value = ""
+    }
+}
+
+const checkValueOfYearInput = () => {
+
+    const inputValue = cardYearInput.value;
+    let passValue = 0
+
+    if (inputValue.length === 4) {
+        if (inputValue < 2026) {
+
+            dateFormatErrTwo.classList.add('hide')
+            dateFormatErrOne.classList.remove('hide')
+            return
+
+        }
+        passValue++
+    }
+
+    if (inputValue.length === 4) {
+        if (inputValue > 2045) {
+
+            dateFormatErrOne.classList.add('hide')
+            dateFormatErrTwo.classList.remove('hide')
+            return
+
+        }
+        passValue++
+    }
+
+    if (inputValue.length > 4) {
+
+        return cardYearInput.value = ""
+    }
+
+    if (inputValue.length === 4 && passValue > 0) {
+
+        cardYearInput.value = inputValue % 100
+
+        dateFormatErrOne.classList.add('hide')
+        dateFormatErrTwo.classList.add('hide')
+        cardCvcInput.focus()
+    }
+
+
+}
+
+
+const checkNameFormat = () => {
+
+    const name = cardNameInput.value.split('');
+
+    for (i = 0; i < name.length; i++) {
+        if (forbiddenChar.includes(name[i])) {
+
+            cardNameFormatErr.classList.remove('hide')
+            return cardNameInput.value = ""
+        }
+    }
+
+    cardNameFormatErr.classList.add('hide')
 }
 
 const areInputsValid = () => {
@@ -242,3 +330,7 @@ confirmBtn.addEventListener("click", getInputsValue)
 cardNumberInput.addEventListener("input", handleCardNumberInput)
 
 continueButton.addEventListener('click', backToResetForm)
+
+cardMonthInput.addEventListener('input', checkValueOfMonthInput)
+cardYearInput.addEventListener('input', checkValueOfYearInput)
+cardNameInput.addEventListener('input', checkNameFormat)
