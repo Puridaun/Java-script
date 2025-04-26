@@ -139,7 +139,7 @@ const checkValueOfYearInput = () => {
     const inputValue = cardYearInput.value;
     let passValue = 0
 
-    if (inputValue.length === 4) {
+    if (inputValue.length === 4 || inputValue.length < 4) {
         if (inputValue < 2026) {
 
             expDateLabelErr.innerText = 'Year expired';
@@ -250,6 +250,21 @@ const areInputsValid = () => {
         cardNumberFormatErr.classList.add('hide')
         // Input error
 
+    }
+
+    if (cardNumberNoSpaces.length !== 16 && cardNumberNoSpaces.length > 0) {
+
+        // Label error
+        cardNumberFormatErr.innerText = "Too short, must contain 16 digits";
+        cardNumberFormatErr.classList.remove('hide')
+        // Input error
+        cardNumberInput.classList.add('input-error')
+    } else {
+        // Label error
+        cardNumberFormatErr.innerText = "Wrong format, only numbers";
+        cardNumberFormatErr.classList.add('hide')
+        // Input error
+        cardNumberInput.classList.remove('input-error')
     }
 
     // Month input-------------------------------
