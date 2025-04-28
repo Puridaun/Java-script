@@ -1,0 +1,125 @@
+ * {
+     margin: 0px;
+     padding: 0px;
+     box-sizing: border-box;
+     font-family: "Work Sans", sans-serif;
+ }
+
+ :root {
+     --Dark-purple: #301534;
+     --Pink: #AD28EB;
+     --Light-pink: #F8EEFF;
+     --Pale-purple: #8B6990;
+     --White: #FFFFFF;
+ }
+
+ /* 
+Breakpoints:
+640px
+768px
+1024px
+1280px
+1536px
+*/
+
+ html,
+ body {
+     height: 100vh;
+ }
+
+
+
+ .img-background-div {
+     background-image: url(./assets/Frame4.svg);
+     height: 30vh;
+ }
+
+ .background-div {
+     background-color: var(--Light-pink);
+     height: 70vh;
+     padding: 24px;
+ }
+
+ .faq-container {
+     background-color: var(--White);
+     position: absolute;
+     top: 142.5px;
+     padding: 24px;
+     border-radius: 16px;
+     /* Add these properties for centering */
+     left: 50%;
+     transform: translateX(-50%);
+     width: calc(100% - 48px);
+     max-width: 600px;
+     display: flex;
+     flex-direction: column;
+
+ }
+
+ .faqs {
+     display: flex;
+     gap: 24px;
+     margin-bottom: 24px;
+ }
+
+ .accordion-container {
+     display: flex;
+     flex-direction: column;
+     justify-content: space-around;
+     border-bottom: 1px solid var(--Light-pink);
+ }
+
+ .accordion-container p {
+     color: var(--Pale-purple);
+     margin-bottom: 24px;
+     line-height: 24px;
+ }
+
+ .accordion-button {
+     border: none;
+
+     padding-top: 20px;
+     padding-bottom: 20px;
+     background: none;
+     display: flex;
+     align-items: center;
+     gap: 24px;
+     cursor: pointer;
+ }
+
+
+
+ .accordion-button span {
+     width: 100%;
+     max-width: 480px;
+     text-align: left;
+     font-size: 16px;
+     font-weight: 500;
+ }
+
+
+ .accordion-button span:hover {
+     color: var(--Pink);
+ }
+
+ @media (min-width: 640px) {
+
+     .faq-container {
+         padding: 40px;
+
+     }
+
+     .faqs h1 {
+         font-size: 56px;
+     }
+
+     .faqs img {
+         width: 40px;
+     }
+
+ }
+
+
+ .hide {
+     display: none;
+ }
