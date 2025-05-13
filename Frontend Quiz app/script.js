@@ -4,16 +4,21 @@ const questions = document.querySelectorAll('.quiz-subject');
 const quizTitle = document.querySelector('.quiz-app-title');
 const quizQuestionText = document.querySelector('.question-text');
 const submitAnswer = document.querySelector('.submit-answer-btn');
+const nextQuestion = document.querySelector('.next-question-btn');
 let answers
 const questionOfMax = document.querySelector('.question-of-max')
 const questionOfMaxSpan = document.querySelector('.question-of-max span')
 const subtitleSugestion = document.querySelector('.subtitle-sugestion')
 const noAnswerError = document.querySelector('.no-answer-error')
+const selectedCategoryName = document.querySelector('.selected-subject-name')
+const selectedCategoryBox = document.querySelector('.selected-subject')
+
+
 // Variables
-let numberOfQuestion = 1;
+let numberOfQuestion = 0;
 let answer = ''
 let clickedAnswer = ''
-
+let maxQuestions = 0;
 
 // Data from API
 let quizQuestions = []
@@ -43,6 +48,8 @@ const questionAndAnswers = async () => {
 
         correctAnswers.push(data.results[i].correct_answer)
     }
+
+    maxQuestions = data.results.length
 };
 
 questionAndAnswers();
@@ -56,6 +63,21 @@ const startQuiz = function () {
     // click on questions and get their innerText and show the question and answers 
     const category = this.querySelector('p').innerText;
 
+    selectedCategoryName.innerText = category;
+    selectedCategoryBox.classList.remove('invisible')
+
+    if (category === 'HTML') {
+        selectedCategoryBox.querySelector('img').setAttribute('src', './assests/html icon.svg')
+    }
+    if (category === 'CSS') {
+        selectedCategoryBox.querySelector('img').setAttribute('src', './assests/css icon.svg')
+    }
+    if (category === 'Javascript') {
+        selectedCategoryBox.querySelector('img').setAttribute('src', './assests/js icon.svg')
+    }
+    if (category === 'Accesibility') {
+        selectedCategoryBox.querySelector('img').setAttribute('src', './assests/acces icon.svg')
+    }
     // Show the first question and answers 
 
     quizTitle.classList.add('hide');
@@ -67,13 +89,14 @@ const startQuiz = function () {
     questions.forEach(question => {
         question.querySelector('.subject-category img').classList.add('hide')
         question.querySelector('.subject-category label').classList.remove('hide')
-    })
+    });
+
     for (let i = 0; i < 4; i++) {
 
         questions[i].querySelector('.subject-category p').innerText = allAnswers[numberOfQuestion][i]
-    }
-    numberOfQuestion++
-    submitAnswer.classList.remove('hide')
+    };
+    numberOfQuestion++;
+    submitAnswer.classList.remove('hide');
     // add event listener for every answer (add a class at the start of quiz on every answer)
 
     questions.forEach(question => {
@@ -90,17 +113,71 @@ const startQuiz = function () {
 const changeToNextQuestion = () => {
 
 
+    nextQuestion.classList.add('hide')
+    submitAnswer.classList.remove('hide')
+
+
+
+    // After 2s change the question and the answers 
+
+
+
+    questions.forEach(question => {
+        question.style.border = 'none'
+        question.querySelector('label').style.backgroundColor = 'var(--Blue-50)'
+    })
+
+    clickedAnswer.querySelector(':scope > img').classList.add('hide')
+
+    quizQuestionText.innerText = quizQuestions[numberOfQuestion];
+
+    for (let i = 0; i < 4; i++) {
+
+        questions[i].querySelector('.subject-category p').innerText = allAnswers[numberOfQuestion][i]
+    }
+    numberOfQuestion++
+    questions.forEach(question => {
+        question.classList.remove('disabled')
+    })
+
+    questionOfMaxSpan.innerText = numberOfQuestion
+    submitAnswer.classList.remove('disabled')
+
+    clickedAnswer = ''
+
+    questions.forEach(question => {
+        question.querySelector(':scope > img').classList.add('hide')
+    })
+
+}
+
+const checkAnswer = () => {
+
+
+
     if (clickedAnswer === '') {
         noAnswerError.classList.remove('hide')
         return
     }
+
+
+
+    for (let i = 0; i < 4; i++) {
+        if (questions[i].querySelector('.subject-category p').innerText === correctAnswers[numberOfQuestion - 1]) {
+            questions[i].querySelector(':scope > img').classList.remove('hide')
+        }
+    }
+
     // Disable answers after click submit
 
     questions.forEach(question => {
         question.classList.add('disabled')
     })
     clickedAnswer.classList.remove('disabled')
-    submitAnswer.classList.add('disabled')
+
+    // submitAnswer.classList.add('disabled')
+    submitAnswer.classList.add('hide')
+
 
     // check if Answer is correct and change css style
 
@@ -113,34 +190,17 @@ const changeToNextQuestion = () => {
         clickedAnswer.querySelector('label').style.backgroundColor = 'var(--Orange-400)'
     }
 
-    // After 2s change the question and the answers 
 
-    setTimeout(() => {
+    if (numberOfQuestion < maxQuestions) {
+        nextQuestion.classList.remove('hide')
 
-        questions.forEach(question => {
-            question.style.border = 'none'
-            question.querySelector('label').style.backgroundColor = 'var(--Blue-50)'
-        })
+    } else {
 
-        clickedAnswer.querySelector(':scope > img').classList.add('hide')
-
-        quizQuestionText.innerText = quizQuestions[numberOfQuestion];
-
-        for (let i = 0; i < 4; i++) {
-
-            questions[i].querySelector('.subject-category p').innerText = allAnswers[numberOfQuestion][i]
-        }
-        numberOfQuestion++
-        questions.forEach(question => {
-            question.classList.remove('disabled')
-        })
-
-        questionOfMaxSpan.innerText = numberOfQuestion - 1
-        submitAnswer.classList.remove('disabled')
-
-        clickedAnswer = ''
-    }, 800)
-
+        quizTitle.classList.remove('hide')
+        questionOfMax.classList.add('hide')
+        quizQuestionText.classList.add('hide')
+        return
+    }
 
 }
 
@@ -164,5 +224,6 @@ const selectAnswer = function () {
 
 
 questions.forEach(question => { question.addEventListener('click', startQuiz) })
-submitAnswer.addEventListener('click', changeToNextQuestion)
+nextQuestion.addEventListener('click', changeToNextQuestion)
+submitAnswer.addEventListener('click', checkAnswer)
 
