@@ -218,45 +218,101 @@ for (let i = 1; i < 21; i++) {
 
 // 10) Tot in codul solutiei de mai sus, includeti un console.log la final care sa afiseze media varstelor. Ex: daca ai array-ul [5, 20, 8] => se va afisa "Average: 11".
 
-let numbers = [12, 1, 10, 4, 23, 55, 21, 23, 43]
+// let numbers = [12, 1, 10, 4, 23, 55, 21, 23, 43]
 
-let children = 0;
-let teenagers = 0;
-let adults = 0;
-let seniors = 0;
+// let children = 0;
+// let teenagers = 0;
+// let adults = 0;
+// let seniors = 0;
 
-for (i = 0; i < numbers.length; i++) {
+// for (i = 0; i < numbers.length; i++) {
 
-    if (numbers[i] < 12) {
-        children++
+//     if (numbers[i] < 12) {
+//         children++
 
-    } else if (numbers[i] >= 12 && numbers[i] < 18) {
-        teenagers++
-    } else if (numbers[i] >= 18 && numbers[i] < 65) {
-        adults++
-    } else {
-        seniors++
+//     } else if (numbers[i] >= 12 && numbers[i] < 18) {
+//         teenagers++
+//     } else if (numbers[i] >= 18 && numbers[i] < 65) {
+//         adults++
+//     } else {
+//         seniors++
+//     }
+
+// }
+
+// console.log(`No. of children: ${children}`)
+// console.log(`No. of teenagers: ${teenagers}`)
+// console.log(`No. of adults: ${adults}`)
+// console.log(`No. of seniors: ${seniors}`)
+
+// let sumOfNumbers = 0;
+
+// for (i = 0; i < numbers.length; i++) {
+//     sumOfNumbers += numbers[i];
+// }
+// console.log(sumOfNumbers)
+
+
+// let numbersAverage = sumOfNumbers / numbers.length;
+
+
+// console.log(numbersAverage.toFixed(2))
+
+
+// function wordSearch(query, seq) {
+//     let newSeq = [];
+//     for (let i = 0; i < seq.length; i++) {
+//         if (seq[i].toUpperCase().includes(query.toUpperCase())) {
+//             newSeq.push(seq[i]);
+//         }
+//     }
+
+//     if (newSeq.length === 0) {
+//         return newSeq = ['Empty'];
+//     }
+
+//     return newSeq;
+// }
+
+// // Example calls
+// console.log(wordSearch("ab", ["za", "aB", "Abc", "zAB", "zbc"]));   // ["aB", "Abc", "zAB"]
+// console.log(wordSearch("abcd", ["za", "aB", "Abc", "zAB", "zbc"])); // "Empty"
+
+
+const isOpposite = (s1, s2) => {
+
+
+    // const arrayS2 = [];
+    let s3 = '';
+
+    if (s1 === '' && s2 === '') {
+        return false
     }
 
+
+    for (let i = 0; i < s1.length; i++) {
+
+        if (s1[i] === s1[i].toUpperCase()) {
+
+
+            // arrayS2.push(arrayS1[i].toLowerCase())
+            s3 += s1[i].toLowerCase()
+        } else {
+
+            // arrayS2.push(arrayS1[i].toUpperCase())
+            s3 += s1[i].toUpperCase()
+        }
+
+
+    }
+
+
+    if (s2 === s3) {
+        return true
+    }
+    return false;
+
 }
 
-console.log(`No. of children: ${children}`)
-console.log(`No. of teenagers: ${teenagers}`)
-console.log(`No. of adults: ${adults}`)
-console.log(`No. of seniors: ${seniors}`)
 
-let sumOfNumbers = 0;
-
-for (i = 0; i < numbers.length; i++) {
-    sumOfNumbers += numbers[i];
-}
-console.log(sumOfNumbers)
-
-
-let numbersAverage = sumOfNumbers / numbers.length;
-
-
-console.log(numbersAverage.toFixed(2))
-
-
-
+console.log(isOpposite("ab", "AB"))

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frontend Quiz app</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ------------------ -->
+
+    <header>
+      <div class="selected-subject invisible">
+        <img src="./assests/acces icon.svg" />
+        <p class="selected-subject-name">Accesibility</p>
+      </div>
+      <div class="display-customize">
+        <img src="./assests/fluent_weather-sunny-16-regular.svg" />
+        <img src="./assests/fluent_weather-moon-16-regular.svg" />
+      </div>
+    </header>
+
+    <!-- ------------- -->
+
+    <div class="quiz-app-container">
+      <div class="quiz-app-left-side">
+        <p class="question-of-max hide">Question <span>1</span> of 10</p>
+        <div class="quiz-app-title">
+          <h1 class="fw300">Welcome to the</h1>
+          <h1 class="fw500">Frontend Quiz!</h1>
+        </div>
+        <p class="question-text fw500 hide">
+          Which of these color contrast ratios defines the minimum WCAG 2.1
+          Level AA requirement for normal text?
+        </p>
+        <p class="subtitle-sugestion fw300">Pick a subject to get started.</p>
+      </div>
+      <div class="quiz-app-right-side">
+        <div class="quiz-subject">
+          <div class="subject-category">
+            <label class="answer-label hide">A</label>
+            <img src="./assests/html icon.svg" class="" />
+            <p>HTML</p>
+          </div>
+          <img
+            src="./assests/fluent_checkmark-circle-16-regular.svg"
+            class="hide"
+          />
+        </div>
+        <div class="quiz-subject">
+          <div class="subject-category">
+            <label class="answer-label hide">B</label>
+            <img src="./assests/css icon.svg" class="" />
+            <p>CSS</p>
+          </div>
+          <img
+            src="./assests/fluent_checkmark-circle-16-regular.svg"
+            class="hide"
+          />
+        </div>
+        <div class="quiz-subject">
+          <div class="subject-category">
+            <label class="answer-label hide">C</label>
+            <img src="./assests/js icon.svg" class="" />
+            <p>Javascript</p>
+          </div>
+          <img
+            src="./assests/fluent_checkmark-circle-16-regular.svg"
+            class="hide"
+          />
+        </div>
+        <div class="quiz-subject">
+          <div class="subject-category">
+            <label class="answer-label hide">D</label>
+            <img src="./assests/acces icon.svg" class="" />
+            <p>Accesibility</p>
+          </div>
+          <img
+            src="./assests/fluent_checkmark-circle-16-regular.svg"
+            class="hide"
+          />
+        </div>
+        <button type="button" class="submit-button submit-answer-btn hide">
+          Submit Answer
+        </button>
+        <button type="button" class="submit-button next-question-btn hide">
+          Next Question
+        </button>
+        <p class="no-answer-error hide">Please select an answer</p>
+      </div>
+    </div>
+
+    <!-- -------------- -->
+
+    <script src="script.js"></script>
+  </body>
+</html>
