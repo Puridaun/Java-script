@@ -111,6 +111,25 @@ Breakpoints:
      font-size: 18px;
  }
 
+ .progress-container {
+     width: 100%;
+     height: 16px;
+     padding: 4px;
+     border-radius: 4px;
+     background-color: var(--White);
+     overflow: hidden;
+     margin: 32px 0;
+     position: relative;
+ }
+
+ .progress-bar {
+     height: 100%;
+     width: 0%;
+     background-color: var(--Purple-600);
+     border-radius: 4px;
+     transition: width 0.3s ease;
+ }
+
  /* ------------------Right Side------------------------------------------ */
 
  .quiz-app-right-side {
@@ -170,6 +189,44 @@ Breakpoints:
 
  .submit-button:hover {
      opacity: 100%;
+ }
+
+
+ .show-score {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     width: 100%;
+     padding: 32px;
+     background-color: var(--White);
+     border-radius: 24px;
+     margin-left: auto;
+     margin-right: auto;
+     margin-bottom: 16px;
+     color: var(--Grey-900);
+ }
+
+ .show-score>p:first-of-type {
+     font-size: 88px;
+     margin-top: 16px;
+
+ }
+
+ .show-score>p:nth-of-type(2) {
+     font-size: 18px;
+     margin-top: 16px;
+
+ }
+
+ .no-answer-error {
+     margin-left: auto;
+     margin-right: auto;
+     color: red;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 8px;
  }
 
  /* --------------------------------MEDIA Query---------------- */
@@ -247,6 +304,26 @@ Breakpoints:
          padding: 30px;
 
      }
+
+     .show-score {
+
+         padding: 48px;
+
+         border-radius: 24px;
+
+         margin-bottom: 32px;
+     }
+
+     .show-score>p:first-of-type {
+         font-size: 140px;
+         margin-top: 40px;
+
+     }
+
+     .show-score>p:nth-of-type(2) {
+         font-size: 24px;
+         margin-top: 16px;
+     }
  }
 
 
@@ -285,6 +362,12 @@ Breakpoints:
          width: 564px;
      }
 
+     .show-score {
+         width: 564px;
+         padding: 48px;
+         border-radius: 24px;
+         margin-bottom: 32px;
+     }
 
  }
 

@@ -30,7 +30,7 @@
 
     <div class="quiz-app-container">
       <div class="quiz-app-left-side">
-        <p class="question-of-max hide">Question <span>1</span> of 10</p>
+        <p class="question-of-max hide">Question <span>0</span> of 10</p>
         <div class="quiz-app-title">
           <h1 class="fw300">Welcome to the</h1>
           <h1 class="fw500">Frontend Quiz!</h1>
@@ -40,6 +40,9 @@
           Level AA requirement for normal text?
         </p>
         <p class="subtitle-sugestion fw300">Pick a subject to get started.</p>
+        <div class="progress-container hide">
+          <div class="progress-bar"></div>
+        </div>
       </div>
       <div class="quiz-app-right-side">
         <div class="quiz-subject">
@@ -50,6 +53,10 @@
           </div>
           <img
             src="./assests/fluent_checkmark-circle-16-regular.svg"
+            class="hide"
+          />
+          <img
+            src="./assests/fluent_dismiss-circle-16-regular.svg"
             class="hide"
           />
         </div>
@@ -63,6 +70,10 @@
             src="./assests/fluent_checkmark-circle-16-regular.svg"
             class="hide"
           />
+          <img
+            src="./assests/fluent_dismiss-circle-16-regular.svg"
+            class="hide"
+          />
         </div>
         <div class="quiz-subject">
           <div class="subject-category">
@@ -72,6 +83,10 @@
           </div>
           <img
             src="./assests/fluent_checkmark-circle-16-regular.svg"
+            class="hide"
+          />
+          <img
+            src="./assests/fluent_dismiss-circle-16-regular.svg"
             class="hide"
           />
         </div>
@@ -85,6 +100,10 @@
             src="./assests/fluent_checkmark-circle-16-regular.svg"
             class="hide"
           />
+          <img
+            src="./assests/fluent_dismiss-circle-16-regular.svg"
+            class="hide"
+          />
         </div>
         <button type="button" class="submit-button submit-answer-btn hide">
           Submit Answer
@@ -92,7 +111,21 @@
         <button type="button" class="submit-button next-question-btn hide">
           Next Question
         </button>
-        <p class="no-answer-error hide">Please select an answer</p>
+        <div class="no-answer-error hide">
+          <img src="./assests/fluent_dismiss-circle-16-regular.svg" />
+          <p class="">Please select an answer</p>
+        </div>
+      </div>
+      <div class="show-score-container hide">
+        <div class="show-score">
+          <div class="selected-subject">
+            <img src="./assests/acces icon.svg" />
+            <p class="selected-subject-name">Accesibility</p>
+          </div>
+          <p class="score fw500">8</p>
+          <p class="number-of-question fw500">out of 10</p>
+        </div>
+        <button class="submit-button play-again-button">Play Again</button>
       </div>
     </div>
 
