@@ -1,5 +1,7 @@
 
 // Get html elements
+const body = document.body;
+const header = document.header
 const questions = document.querySelectorAll('.quiz-subject');
 const quizTitle = document.querySelector('.quiz-app-title');
 const quizTitleH1 = document.querySelectorAll('.quiz-app-title h1');
@@ -19,6 +21,9 @@ const quizScore = document.querySelector('.score');
 const playAgainBtn = document.querySelector('.play-again-button')
 const progressBar = document.querySelector('.progress-bar')
 const progressContainer = document.querySelector('.progress-container')
+const toggleTheme = document.querySelector('.theme-switcher')
+const quizAppContainer = document.querySelector('.quiz-app-container')
+
 // Variables
 let numberOfQuestion = 0;
 let answer = '';
@@ -31,7 +36,8 @@ let quizQuestions = [];
 let allAnswers = [];
 let correctAnswers = [];
 
-
+//Dark theme colors variable
+let themeColor = 'var(--Grey-50)'
 
 // 1. Select (click) category for quiz
 // 2. Show quiz question and answers
@@ -42,20 +48,24 @@ let correctAnswers = [];
 
 const questionAndAnswers = async () => {
 
-    const response = await fetch('https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple')
-    const data = await response.json()
+    try {
+        const response = await fetch('https://opentdb.com/api.php?amount=10&difficulty=medium&type=multiple')
+        const data = await response.json()
 
-    for (let i = 0; i < data.results.length; i++) {
+        for (let i = 0; i < data.results.length; i++) {
 
-        quizQuestions.push(data.results[i].question)
-        const correctAnswer = data.results[i].correct_answer
-        const incorrectAnswers = data.results[i].incorrect_answers
-        allAnswers.push([correctAnswer, ...incorrectAnswers].sort(() => Math.random()));
+            quizQuestions.push(data.results[i].question)
+            const correctAnswer = data.results[i].correct_answer
+            const incorrectAnswers = data.results[i].incorrect_answers
+            allAnswers.push([correctAnswer, ...incorrectAnswers].sort(() => Math.random()));
 
-        correctAnswers.push(data.results[i].correct_answer)
+            correctAnswers.push(data.results[i].correct_answer)
+        }
+        maxQuestions = data.results.length
+    } catch (error) {
+
+        alert('An error occured. Please refresh page')
     }
-
-    maxQuestions = data.results.length
 };
 
 questionAndAnswers();
@@ -119,6 +129,8 @@ const startQuiz = function () {
         question.querySelector('.subject-category label').classList.remove('hide')
     });
 
+    randomize(allAnswers[numberOfQuestion - 1])
+
     for (let i = 0; i < 4; i++) {
 
         questions[i].querySelector('.subject-category p').innerText = allAnswers[numberOfQuestion - 1][i]
@@ -154,12 +166,14 @@ const changeToNextQuestion = () => {
 
     questions.forEach(question => {
         question.style.border = 'none'
-        question.querySelector('label').style.backgroundColor = 'var(--Blue-50)'
+        question.querySelector('label').style.backgroundColor = themeColor
     })
 
     clickedAnswer.querySelector(':scope > img:nth-of-type(2)').classList.add('hide')
 
     quizQuestionText.innerText = quizQuestions[numberOfQuestion];
+
+    randomize(allAnswers[numberOfQuestion])
 
     for (let i = 0; i < 4; i++) {
 
@@ -329,7 +343,43 @@ const updateProgress = () => {
     progressBar.style.width = progressPercentage + '%';
 }
 
+
+
+function randomize(arr) {
+
+    // Start from the last element and swap 
+    // one by one. We don't need to run for 
+    // the first element that's why i > 0 
+    for (let i = arr.length - 1; i > 0; i--) {
+
+        // Pick a random index from 0 to i inclusive
+        let j = Math.floor(Math.random() * (i + 1));
+
+        // Swap arr[i] with the element 
+        // at random index 
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+}
+
+
+const toogleThemeColor = function () {
+    if (this.checked) {
+
+        body.style.backgroundColor = ' #3B4D66';
+        quizAppContainer.classList.add('dark-theme')
+        quizScoreContainer.classList.add('dark-theme')
+        selectedCategoryBox[0].classList.add('dark-theme')
+    } else {
+
+        body.style.backgroundColor = '#EBF0FF';
+        quizAppContainer.classList.remove('dark-theme')
+        quizScoreContainer.classList.remove('dark-theme')
+        selectedCategoryBox[0].classList.remove('dark-theme')
+    }
+}
+
 questions.forEach(question => { question.addEventListener('click', startQuiz) })
 nextQuestion.addEventListener('click', changeToNextQuestion)
 submitAnswer.addEventListener('click', checkAnswer)
 playAgainBtn.addEventListener('click', playAgain)
+toggleTheme.addEventListener('click', toogleThemeColor)

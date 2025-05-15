@@ -11,13 +11,25 @@
      --White: #FFFFFF;
      --Green-500: #2FD887;
      --Blue-500: #306AFF;
-     --Grey-500: #626C7F;
+     --Secondary-color: #626C7F;
      --Purple-600: #A729F5;
      --Green-100: #E0FDEF;
-     --Blue-50: #EBF0FF;
+     --Background-color: #EBF0FF;
      --Purple-100: #F6E7FF;
      --Orange-400: #FF7E35;
      --Orange-50: #FFF5ED;
+     --Secondary-background-color: #FFFFFF;
+     --Grey-50: #F4F6FA;
+ }
+
+ .dark-theme {
+     --Background-color: #3B4D66;
+     --Secondary-background-color: #46566c;
+     --Secondray-color: #ABC1E1;
+     --Primar-color: #FFFFFF;
+     --Grey-50: #F4F6FA;
+     --Label-color: #626C7F;
+     --Blue-300: #ABC1E1;
  }
 
  /* 
@@ -30,7 +42,7 @@ Breakpoints:
 */
 
  body {
-     background-color: var(--Blue-50);
+     background-color: var(--Background-color);
 
  }
 
@@ -67,7 +79,15 @@ Breakpoints:
      width: 32px;
  }
 
+ .selected-subject p {
+     color: var(--Primar-color);
+ }
 
+ .display-customize {
+     display: flex;
+     align-items: center;
+     gap: 4px;
+ }
 
  .display-customize img {
 
@@ -82,7 +102,12 @@ Breakpoints:
      padding-right: 24px;
      padding-top: 32px;
      font-size: 18px;
+     color: var(--Primar-color);
 
+ }
+
+ .quiz-app-title {
+     color: var(--Title-color);
  }
 
  /* ------------------Left Side ------------------------------ */
@@ -100,6 +125,7 @@ Breakpoints:
 
  .question-of-max {
      margin-bottom: 24px;
+     color: var(--Blue-300);
  }
 
  .subtitle-sugestion {
@@ -115,8 +141,8 @@ Breakpoints:
      width: 100%;
      height: 16px;
      padding: 4px;
-     border-radius: 4px;
-     background-color: var(--White);
+     border-radius: 10px;
+     background-color: var(--Secondary-background-color);
      overflow: hidden;
      margin: 32px 0;
      position: relative;
@@ -126,7 +152,7 @@ Breakpoints:
      height: 100%;
      width: 0%;
      background-color: var(--Purple-600);
-     border-radius: 4px;
+     border-radius: 8px;
      transition: width 0.3s ease;
  }
 
@@ -145,7 +171,7 @@ Breakpoints:
      justify-content: space-between;
      width: 100%;
      padding: 16px;
-     background-color: var(--White);
+     background-color: var(--Secondary-background-color);
      border-radius: 16px;
 
  }
@@ -156,20 +182,19 @@ Breakpoints:
      gap: 16px;
  }
 
- /* .quiz-subject:hover {
-     border: 4px solid var(--Purple-600)
- } */
+
 
  .quiz-subject img {
      width: 32px;
  }
 
  .answer-label {
-     background-color: var(--Blue-50);
+     background-color: var(--Grey-50);
      text-align: center;
-     padding: 12px 18px;
+     padding: 8px 14px;
      border-radius: 8px;
      font-size: 18px;
+     color: var(--Label-color);
  }
 
 
@@ -199,12 +224,12 @@ Breakpoints:
      flex-direction: column;
      width: 100%;
      padding: 32px;
-     background-color: var(--White);
+     background-color: var(--Secondary-background-color);
      border-radius: 24px;
      margin-left: auto;
      margin-right: auto;
      margin-bottom: 16px;
-     color: var(--Grey-900);
+     color: var(--Primar-color);
  }
 
  .show-score>p:first-of-type {
@@ -216,6 +241,7 @@ Breakpoints:
  .show-score>p:nth-of-type(2) {
      font-size: 18px;
      margin-top: 16px;
+     color: var(--Blue-300);
 
  }
 
@@ -228,6 +254,47 @@ Breakpoints:
      justify-content: center;
      gap: 8px;
  }
+
+
+ /* ------------------------Toggle switch------------------- */
+
+ input[type=checkbox] {
+     height: 0;
+     width: 0;
+     visibility: hidden;
+ }
+
+ .display-customize label {
+     cursor: pointer;
+     text-indent: -9999px;
+     width: 32px;
+     height: 20px;
+
+     background: var(--Purple-600);
+     display: block;
+     border-radius: 10px;
+     position: relative;
+ }
+
+ .display-customize label:after {
+     content: '';
+     position: absolute;
+     top: 4px;
+     left: 4px;
+     width: 12px;
+     height: 12px;
+     background: var(--White);
+     border-radius: 8px;
+     transition: 0.3s;
+ }
+
+
+ input:checked+label:after {
+     left: calc(100% - 5px);
+     transform: translateX(-100%);
+ }
+
+
 
  /* --------------------------------MEDIA Query---------------- */
 
@@ -324,6 +391,25 @@ Breakpoints:
          font-size: 24px;
          margin-top: 16px;
      }
+
+
+     .display-customize label {
+
+         width: 40px;
+         height: 24px;
+         border-radius: 12px;
+
+     }
+
+     .display-customize label:after {
+
+         top: 4px;
+         left: 4px;
+         width: 16px;
+         height: 16px;
+         border-radius: 8px;
+
+     }
  }
 
 
@@ -392,5 +478,5 @@ Breakpoints:
      pointer-events: none;
      opacity: 0.6;
      cursor: not-allowed;
-     user-select: none;
+     /* user-select: none; */
  }
