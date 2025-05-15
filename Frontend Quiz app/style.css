@@ -176,6 +176,10 @@ Breakpoints:
 
  }
 
+ .quiz-subject:hover {
+     opacity: 60%;
+ }
+
  .subject-category {
      display: flex;
      align-items: center;
@@ -201,9 +205,9 @@ Breakpoints:
 
  .submit-button {
      width: 100%;
-     padding: 21px;
+     padding: 18px;
      background-color: var(--White);
-     border-radius: 12px;
+     border-radius: 16px;
      gap: 16px;
      border: none;
      background-color: var(--Purple-600);
@@ -368,7 +372,7 @@ Breakpoints:
 
      .submit-button {
          font-size: 24px;
-         padding: 30px;
+         padding: 24px;
 
      }
 
